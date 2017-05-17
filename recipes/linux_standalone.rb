@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 directory File.dirname(node['bitbucket']['home_path']) do
-  owner node['bitbucket']['user']
-  group node['bitbucket']['user']
+  owner 'root'
+  group 'root'
   mode 00755
   action :create
   recursive true
@@ -15,6 +15,15 @@ user node['bitbucket']['user'] do
   manage_home true
   system true
   action :create
+end
+
+# changing ownership after user creation
+directory File.dirname(node['bitbucket']['home_path']) do
+  owner node['bitbucket']['user']
+  group node['bitbucket']['user']
+  mode 00755
+  action :create
+  recursive true
 end
 
 directory node['bitbucket']['install_path'] do
@@ -33,4 +42,12 @@ ark node['bitbucket']['product'] do
   version node['bitbucket']['version']
   owner node['bitbucket']['user']
   group node['bitbucket']['user']
+end
+
+template "#{node['bitbucket']['install_path']}/bitbucket/bin/set-bitbucket-home.sh" do
+  source 'set-bitbucket-home.sh.erb'
+  owner node['bitbucket']['user']
+  group node['bitbucket']['user']
+  mode 00755
+  #notifies :restart, "service[#{node['bitbucket']['product']}]", :delayed
 end

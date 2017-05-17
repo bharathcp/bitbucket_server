@@ -9,8 +9,8 @@ default['bitbucket']['user']         = 'atlbitbucket'
 default['bitbucket']['url']      = "#{node['bitbucket']['url_base']}-#{node['bitbucket']['version']}.tar.gz"
 default['bitbucket']['checksum'] =
   case node['bitbucket']['version']
-  when '5.0.0' then '2731997d6e223cb512906183f5c231be602319ce05d2794cdf5b957a1fd06e08'
-  when '5.0.1' then '2731997d6e223cb512906183f5c231be602319ce05d2794cdf5b957a1fd06e08'
+  when '5.0.0' then 'a1505e06dc126279c710ce6c289fc41b078bab5de0beff44fc27bd17339ebdf9'
+  when '5.0.1' then '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
   end
 
 default['bitbucket']['database']['type']     = 'postgresql'

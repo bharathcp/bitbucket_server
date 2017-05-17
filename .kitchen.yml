@@ -19,8 +19,12 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[java]
+      - recipe[git]
       - recipe[bitbucket_server::default]
     verifier:
       inspec_tests:
         - test/smoke/default
     attributes:
+      java:
+        jdk_version: '8'

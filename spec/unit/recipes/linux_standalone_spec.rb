@@ -33,6 +33,14 @@ describe 'bitbucket_server::linux_standalone' do
         mode: 00755
       )
     end
+    it 'generates script to set BITBUCKET_HOME' do
+      path = '/opt/atlassian/bitbucket/bin/set-bitbucket-home.sh'
+      expect(chef_run).to create_template(path).with(
+        user: 'atlbitbucket',
+        group: 'atlbitbucket',
+        mode: 00755
+      )
+    end
     it 'creates service account' do
       path = '/var/atlassian/application-data/bitbucket'
       user = 'atlbitbucket'
