@@ -5,11 +5,31 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
+describe command('which java ') do
+  it { should exist }
+  its('exit_status') { should eq 0 }
+end
+
+describe command('java -version') do
+  its('stderr') { should be > 1.8 }
+end
+
+describe command('which perl ') do
+  it { should exist }
+  its('exit_status') { should eq 0 }
+end
+
+describe command('perl -e "print $]"') do
+  its('stdout') { should be > 5.010 }
+end
+
+describe command('which git ') do
+  it { should exist }
+  its('exit_status') { should eq 0 }
+end
+
+describe command('git -version') do
+  its('stderr') { should be > 1.8 }
 end
 
 # This is an example test, replace it with your own test.
