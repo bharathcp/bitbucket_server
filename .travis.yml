@@ -1,10 +1,13 @@
-language: ruby
-bundler_args: --without integration
-cache: bundler
 sudo: false
-rvm:
-  - 2.3.1
+addons:
+  apt:
+    sources:
+    - chef-stable-precise
+    packages:
+    - chefdk
+install: echo "skip bundle install"
 before_script:
-  - bundle exec berks install
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+#  - /opt/chefdk/bin/chef exec bundle exec berks install
 script:
-  - chef exec bundle exec rake unit:rspec
+  - /opt/chefdk/bin/chef exec rspec
