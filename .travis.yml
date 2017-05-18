@@ -1,13 +1,20 @@
 sudo: false
+
 addons:
   apt:
     sources:
     - chef-stable-precise
     packages:
     - chefdk
+
+services: docker
+
 install: echo "skip bundle install"
+
 before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 #  - /opt/chefdk/bin/chef exec bundle exec berks install
+
 script:
   - /opt/chefdk/bin/chef exec rspec
+  - /opt/chefdk/bin/chef exec kitchen verify

@@ -15,6 +15,7 @@ end
 group :integration do
   gem 'busser-serverspec', '~> 0.2.6'
   gem 'kitchen-vagrant', '~> 0.15'
+  gem 'kitchen-docker'
   gem 'test-kitchen', '~> 1.3'
   gem 'inspec'
   gem 'kitchen-inspec'
