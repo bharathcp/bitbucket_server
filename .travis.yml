@@ -9,12 +9,14 @@ addons:
 
 services: docker
 
-install: echo "skip bundle install"
-
+install:
+  - echo "skip bundle install"
+  - docker --version
+  - chef --version
 before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 #  - /opt/chefdk/bin/chef exec bundle exec berks install
 
 script:
   - /opt/chefdk/bin/chef exec rspec
-  - /opt/chefdk/bin/chef exec kitchen verify
+  - /opt/chefdk/bin/chef exec kitchen test
