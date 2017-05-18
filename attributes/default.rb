@@ -36,3 +36,11 @@ default['bitbucket']['ssh']['port']     = '7999'
 
 default['bitbucket']['tomcat']['port'] = '7990'
 default['bitbucket']['tomcat']['session-timeout'] = '30'
+
+#default git
+default['git']['version'] = '2.8.1'
+
+#default java
+default['java']['jdk_version'] = '8'
+default['java']['install_flavor'] = 'oracle'
+default['java']['oracle']['accept_oracle_download_terms'] = true
