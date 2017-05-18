@@ -20,7 +20,7 @@ suites:
   - name: default
     run_list:
       - recipe[java]
-      - recipe[git]
+      - recipe[git::source]
       - recipe[bitbucket_server::default]
     verifier:
       inspec_tests:
@@ -28,3 +28,5 @@ suites:
     attributes:
       java:
         jdk_version: '8'
+      git:
+        version: '2.8.1'

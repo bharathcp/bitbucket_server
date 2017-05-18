@@ -13,7 +13,6 @@ describe command('java -version') do
   its('stderr') { should include '1.8' }
 end
 
-<<<<<<< Updated upstream
 control 'check-perl' do
   title 'Check perl compiled options and version'
   perl_out = command('perl -V')
@@ -28,17 +27,19 @@ control 'check-perl' do
   describe get_perl_ver do
     it { should be > 5.010 }
   end 
-    
-=======
+end
+
 describe package('perl') do
   it { should be_installed }
   its('version') { should include '5.16' }
 end
 
-describe package('git') do
-  it { should be_installed }
-  its('version') { should include '1.8' }
->>>>>>> Stashed changes
+describe file('/usr/local/bin/git') do
+  it { should be_executable }
+end
+
+describe command('/usr/local/bin/git --version') do
+  its('stdout') { should include 'git version 2.8.1' }
 end
 
 unless os.windows?
