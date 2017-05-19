@@ -1,6 +1,6 @@
 #
 # Cookbook:: bitbucket_server
-# Spec:: default
+# Spec:: configuration_spec
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
@@ -14,7 +14,7 @@ describe 'bitbucket_server::configuration' do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node|
         node.default['bitbucket']['properties'] = {"setup.displayName": "EPLBitbucket", "setup.baseUrl": "localhost:7990"}
       end
-      runner.converge(described_recipe)
+      runner.converge('bitbucket_server::service_init',described_recipe)
     end
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
@@ -38,6 +38,7 @@ describe 'bitbucket_server::configuration' do
         expect(content).to include('setup.displayName=EPLBitbucket')
         expect(content).to include('setup.baseUrl=localhost:7990')
       }
+      expect(chef_run.template(path)).to notify('service[bitbucket]').delayed
     end
   end
 end

@@ -16,5 +16,5 @@ template "#{node['bitbucket']['home_path']}/shared/bitbucket.properties" do
   variables(
     :properties => node['bitbucket']['properties']
   )
-  #notifies :restart, "service[#{node['bitbucket']['product']}]", :delayed
+  notifies :restart, "service[#{node['bitbucket']['product']}]", :delayed
 end

@@ -44,10 +44,10 @@ ark node['bitbucket']['product'] do
   group node['bitbucket']['user']
 end
 
-template "#{node['bitbucket']['install_path']}/bitbucket/bin/set-bitbucket-home.sh" do
+template "#{node['bitbucket']['bin_path']}/set-bitbucket-home.sh" do
   source 'set-bitbucket-home.sh.erb'
   owner node['bitbucket']['user']
   group node['bitbucket']['user']
   mode 00755
-  #notifies :restart, "service[#{node['bitbucket']['product']}]", :delayed
+  notifies :restart, "service[#{node['bitbucket']['product']}]", :delayed
 end

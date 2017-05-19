@@ -18,5 +18,10 @@ describe 'bitbucket_server::default' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
+    it 'should include necessary recipes' do
+      expect(chef_run).to include_recipe('bitbucket_server::linux_standalone')
+      expect(chef_run).to include_recipe('bitbucket_server::configuration')
+      expect(chef_run).to include_recipe('bitbucket_server::service_init')
+    end
   end
 end
