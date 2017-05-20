@@ -4,7 +4,6 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
-
 bitbucket_server_install 'bitbucket' do
   jre_home "#{node['java']['java_home']}/jre"
 end
