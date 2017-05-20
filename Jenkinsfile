@@ -17,6 +17,8 @@ pipeline {
         stage('test') {
             steps {
                 // on Build agent , do bundle install; and use Rake style/lint, unit and integration as different steps 
+        stage('build') {
+            steps {
                 sh 'PATH=$CHEF_HOME:$CHEF_RUBY:$PATH; kitchen verify'
             }
         }
