@@ -2,7 +2,7 @@
 # Cookbook:: bitbucket_server
 # Resource:: install
 #
-
+resource_name :bitbucket_server
 property :server_name, String, name_property: true
 property :version, String, default: '5.0.1'
 property :product, String, default: 'bitbucket'
@@ -10,12 +10,12 @@ property :install_path, String, default: '/opt/atlassian'
 property :home_path, String, default: '/var/atlassian/application-data/bitbucket'
 property :bin_path, String, default: '/opt/atlassian/bitbucket/bin'
 property :install_type, String, default: 'standalone' # would prefer to call this server type
-property :checksum, String, default: 'a1505e06dc126279c710ce6c289fc41b078bab5de0beff44fc27bd17339ebdf9'
+property :checksum, String, default: '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
 property :service_type, String, default: 'init'
 property :url_base, String, default: 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket'
 # write a method to get full url and for bin path & ssh host name
-property :bitbucket_user, String, default: 'bitbucket' 
-property :bitbucket_group, String, default: 'bitbucket'
+property :bitbucket_user, String, default: 'atlbitbucket'
+property :bitbucket_group, String, default: 'atlbitbucket'
 property :database_type, String, default: 'postgresql'
 property :database_version, String, default: '' 
 property :database_host, String, default: '127.0.0.1'
@@ -79,7 +79,7 @@ action :install do
   end
 
   ark new_resource.product do
-    url get_pkg_url 
+    url get_pkg_url
     prefix_root new_resource.install_path
     prefix_home new_resource.install_path
     checksum new_resource.checksum
