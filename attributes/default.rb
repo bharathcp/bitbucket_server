@@ -2,6 +2,7 @@ default['bitbucket']['version']      = '5.0.1'
 default['bitbucket']['product']      = 'bitbucket'
 default['bitbucket']['home_path'] = "/var/atlassian/application-data/#{node['bitbucket']['product']}"
 default['bitbucket']['install_path'] = '/opt/atlassian'
+default['bitbucket']['bin_path'] = "#{node['bitbucket']['install_path']}/#{node['bitbucket']['product']}/bin"
 default['bitbucket']['install_type'] = 'standalone'
 default['bitbucket']['service_type'] = 'init'
 default['bitbucket']['url_base']     = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-#{node['bitbucket']['product']}"
@@ -36,3 +37,11 @@ default['bitbucket']['ssh']['port']     = '7999'
 
 default['bitbucket']['tomcat']['port'] = '7990'
 default['bitbucket']['tomcat']['session-timeout'] = '30'
+
+#default git
+default['git']['version'] = '2.8.1'
+
+#default java
+default['java']['jdk_version'] = '8'
+default['java']['install_flavor'] = 'oracle'
+default['java']['oracle']['accept_oracle_download_terms'] = true
