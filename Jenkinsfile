@@ -19,6 +19,13 @@ pipeline {
                 // on Build agent , do bundle install; and use Rake style/lint, unit and integration as different steps 
         stage('build') {
             steps {
+                // on Build agent , do bundle install; and use Rake style/lint, unit and integration as different steps 
+                sh 'PATH=$CHEF_HOME:$CHEF_RUBY:$PATH; chef exec rake style'
+            }
+        }
+        stage('test') {
+            steps {
+                // on Build agent , do bundle install; and use Rake style/lint, unit and integration as different steps 
                 sh 'PATH=$CHEF_HOME:$CHEF_RUBY:$PATH; kitchen verify'
             }
         }
