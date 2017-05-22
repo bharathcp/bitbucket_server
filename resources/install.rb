@@ -2,14 +2,15 @@
 # Cookbook:: bitbucket_server
 # Resource:: install
 #
-property :product, String, default: node['bitbucket']['product']
-property :version, String, default: node['bitbucket']['version']
-property :bitbucket_user, String, default: node['bitbucket']['user']
-property :bitbucket_group, String, default: node['bitbucket']['group']
-property :home_path, String, default: node['bitbucket']['home_path']
-property :install_path, String, default: node['bitbucket']['install_path']
+property :product, String, default: 'bitbucket'
+property :version, String, default: '5.0.1'
+property :bitbucket_user, String, default: 'atlbitbucket'
+property :bitbucket_group, String, default: 'atlbitbucket'
+property :home_path, String, default: "/var/atlassian/application-data/bitbucket"
+property :install_path, String, default: '/opt/atlassian'
 property :checksum, String, default: '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
-property :url_base, String, default: node['bitbucket']['url_base']
+property :url_base, String, default: "http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket"
+property :jre_home, String
 
 action :install do
   validate_version
@@ -64,6 +65,29 @@ action :install do
     group new_resource.bitbucket_group
   end
 
+  template "#{new_resource.install_path}/bitbucket/bin/set-bitbucket-home.sh" do
+    source 'set-bitbucket-home.sh.erb'
+    owner new_resource.bitbucket_user
+    group new_resource.bitbucket_group
+    mode 00755
+    action :create
+    variables(
+      :home_path => new_resource.home_path
+    )
+    #notifies :restart, "service[new_resource.product]", :delayed
+  end
+
+  template "#{new_resource.install_path}/bitbucket/bin/set-jre-home.sh" do
+    source 'set-jre-home.sh.erb'
+    owner new_resource.bitbucket_user
+    group new_resource.bitbucket_group
+    mode 00755
+    action :create
+    variables(
+      :jre_home => new_resource.jre_home
+    )
+    #notifies :restart, "service[new_resource.product]", :delayed
+  end
 end
 
 action_class.class_eval do

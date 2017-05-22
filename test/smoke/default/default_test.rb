@@ -55,7 +55,7 @@ unless os.windows?
   describe user('atlbitbucket') do
     it { should exist }
   end
-  describe service('bitbucket'), :skip  do
+  describe service('bitbucket') do
     skip "not yet implemented"
     it { should be_installed}
     it { should be_enabled}

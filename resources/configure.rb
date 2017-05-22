@@ -2,11 +2,11 @@
 # Cookbook:: bitbucket_server
 # Resource:: configure
 #
-property :product, String, default: node['bitbucket']['product']
-property :home_path, String, default: node['bitbucket']['home_path']
-property :bitbucket_user, String, default: node['bitbucket']['user']
-property :bitbucket_group, String, default: node['bitbucket']['group']
-property :bitbucket_properties, Hash, required: false, default: node['bitbucket']['properties']
+property :product, String, default: 'bitbucket'
+property :home_path, String, default: "/var/atlassian/application-data/bitbucket"
+property :bitbucket_user, String, default: 'atlbitbucket'
+property :bitbucket_group, String, default: 'atlbitbucket'
+property :bitbucket_properties, Hash, required: false
 
 action :create do
 
@@ -16,6 +16,7 @@ action :create do
     mode 00755
     action :create
     recursive true
+    #notifies :restart, "service[#{new_resource.product}]", :delayed
   end
 
   template "#{new_resource.home_path}/shared/bitbucket.properties" do
@@ -27,7 +28,7 @@ action :create do
     variables(
       :properties => new_resource.bitbucket_properties
     )
-    #notifies :restart, "service[new_resource.product]", :delayed
+    #notifies :restart, "service[#{new_resource.product}]", :delayed
   end
 
 end
