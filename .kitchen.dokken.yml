@@ -2,7 +2,10 @@ driver:
   name: dokken
   privileged: true 
   chef_version: current
-
+  forward:
+  - 7990:7990
+  - 7999:7999
+  memory: 2048
 transport:
   name: dokken
 
@@ -19,6 +22,8 @@ platforms:
       intermediate_instructions:
         - RUN yum -y install which initscripts net-tools wget curl java git
     run_list:
+      - recipe[java]
+      - recipe[git::source]
       - recipe[bitbucket_server::default]
     verifier:
       inspec_tests:
@@ -27,6 +32,7 @@ platforms:
       java:
         install_flavor: 'oracle'
         jdk_version: '8'
+        java_home: "/usr/lib/jvm/java-8-oracle"
         oracle:
           accept_oracle_download_terms: true
       git:
@@ -34,7 +40,7 @@ platforms:
       bitbucket:
         properties: {"setup.displayName":           "MyBitbucket",
                      "setup.baseUrl":               "localhost:7990",
-                     "setup.license":               "mylicensestring",
+                     "setup.license":               "my license",
                      "setup.sysadmin.username":     "admin",
                      "setup.sysadmin.password":     "adminpwd",
                      "setup.sysadmin.displayName":  "admin",

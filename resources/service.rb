@@ -25,14 +25,8 @@ action :create do
         'WantedBy' => 'multi-user.target'
       }
     })
-    action [:create, :enable]
+    action [:create, :enable, :start]
     verify false
-  end
-  service new_resource.product do
-    supports :status => true, :restart => true, :reload => true, :start => true, :stop => true
-    start_command "#{bin_path}/start-bitbucket.sh"
-    stop_command "#{bin_path}/stop-bitbucket.sh"
-    action [ :enable, :start ]
   end
 end
 

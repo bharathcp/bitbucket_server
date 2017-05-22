@@ -1,7 +1,7 @@
 if [ -z "$JRE_HOME" ]; then
     if [ -z "$JAVA_HOME" ]; then
         # If JRE_HOME and JAVA_HOME are not defined, edit this line to define JRE_HOME
-        JRE_HOME="<%= @jre_home %>" # set by chef
+        JRE_HOME="<%= @jre_home if @jre_home %>" # set by chef
     elif [ -n "$JAVA_HOME" ] && [ -x "$JAVA_HOME/jre/bin/java" ]; then
         # If JAVA_HOME points to a valid JDK, use its JRE
         JRE_HOME="$JAVA_HOME/jre"

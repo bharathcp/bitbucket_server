@@ -44,8 +44,8 @@ end
 
 describe file('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties') do
   it { should exist }
-  its('group') { should eq 'atlbitbucket' }
-  its('content') { should include 'MyBitbucket' }
+  its('user') { should eq 'atlbitbucket' }
+  its('content') { should include 'setup.displayName' }
 end
 
 unless os.windows?
@@ -56,37 +56,26 @@ unless os.windows?
     it { should exist }
   end
   describe service('bitbucket') do
-    skip "not yet implemented"
     it { should be_installed}
     it { should be_enabled}
     it { should be_running}
   end
 end
 
-describe port(7990), :skip  do
-  skip "not yet implemented"
+describe port(7990) do
   it { should be_listening }
   its('protocols') { should include 'tcp6' }
   its('processes') {should include 'java'}
-  its('users') {should cmp 'altbitbucket'}
 end
 
-describe port(22), :skip  do
-  skip "not yet implemented"
-  its('processes') { should include 'sshd' }
-  its('protocols') { should include 'tcp' }
-  its('addresses') { should include '0.0.0.0' }
-end
-
-describe port(7999), :skip  do
-  skip "not yet implemented"
+describe port(7992) do
+  it { should be_listening }
   its('processes') { should include 'java' }
   its('protocols') { should include 'tcp6' }
-  its('users') {should cmp 'altbitbucket'}
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  skip "not yet implemented"
-  it { should_not be_listening }
+describe port(7999) do
+  it { should be_listening }
+  its('processes') { should include 'java' }
+  its('protocols') { should include 'tcp6' }
 end
