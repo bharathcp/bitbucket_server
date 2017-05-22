@@ -7,7 +7,8 @@ default['bitbucket']['install_type'] = 'standalone'
 default['bitbucket']['service_type'] = 'init'
 default['bitbucket']['url_base']     = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-#{node['bitbucket']['product']}"
 default['bitbucket']['user']         = 'atlbitbucket'
-default['bitbucket']['url']      = "#{node['bitbucket']['url_base']}-#{node['bitbucket']['version']}.tar.gz"
+default['bitbucket']['group']         = 'atlbitbucket'
+
 default['bitbucket']['checksum'] =
   case node['bitbucket']['version']
   when '5.0.0' then 'a1505e06dc126279c710ce6c289fc41b078bab5de0beff44fc27bd17339ebdf9'

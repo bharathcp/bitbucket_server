@@ -42,8 +42,7 @@ describe command('/usr/local/bin/git --version') do
   its('stdout') { should include 'git version 2.8.1' }
 end
 
-describe file('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties'), :skip  do
-  skip "not yet implemented"
+describe file('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties') do
   it { should exist }
   its('group') { should eq 'atlbitbucket' }
   its('content') { should include 'MyBitbucket' }

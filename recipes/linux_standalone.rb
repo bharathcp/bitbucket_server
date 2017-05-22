@@ -1,1 +1,1 @@
-bitbucket_server 'bitbucket'
+bitbucket_server_install 'bitbucket'

@@ -6,5 +6,5 @@
 
 
 include_recipe 'bitbucket_server::linux_standalone'
-#include_recipe 'bitbucket_server::configuration'
+include_recipe 'bitbucket_server::configuration'
 #include_recipe 'bitbucket_server::service_init'
