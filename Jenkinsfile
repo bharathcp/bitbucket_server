@@ -8,8 +8,15 @@ pipeline {
         KITCHEN_YAML='.kitchen.yml'
     }
     stages {
-        stage('build') {
+        stage('check style') {
             steps {
+                // on Build agent , do bundle install; and use Rake style/lint, unit and integration as different steps 
+                sh 'PATH=$CHEF_HOME:$CHEF_RUBY:$PATH; chef exec rake style'
+            }
+        }
+        stage('test') {
+            steps {
+                // on Build agent , do bundle install; and use Rake style/lint, unit and integration as different steps 
                 sh 'PATH=$CHEF_HOME:$CHEF_RUBY:$PATH; kitchen verify'
             }
         }
