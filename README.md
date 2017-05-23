@@ -32,7 +32,7 @@ end
 Below are the possible attributes:
 
 | Property        | String | default                                                                      | required |
-|:-------------:  |:------:|------------------------------------------------------------------------------|----------|
+|-----------------|:------:|------------------------------------------------------------------------------|----------|
 | product         | String | bitbucket                                                                    | false    |
 | version         | String | 5.0.1                                                                        | false    |
 | bitbucket_user  | String | atlbitbucket                                                                 | false    |
@@ -61,7 +61,7 @@ end
 Below are the possible attributes:
 
 | Property             | String | default                                                                      | required |
-|:--------------------:|:------:|------------------------------------------------------------------------------|----------|
+|----------------------|:------:|------------------------------------------------------------------------------|----------|
 | product              | String | bitbucket                                                                    | false    |
 | bitbucket_user       | String | atlbitbucket                                                                 | false    |
 | bitbucket_group      | String | atlbitbucket                                                                 | false    |
@@ -81,7 +81,7 @@ bitbucket_service 'bitbucket'
 Below are the possible attributes:
 
 | Property             | String | default                                                                      | required |
-|:--------------------:|:------:|------------------------------------------------------------------------------|----------|
+|----------------------|:------:|------------------------------------------------------------------------------|----------|
 | product              | String | bitbucket                                                                    | false    |
 | bitbucket_user       | String | atlbitbucket                                                                 | false    |
 | install_path         | String | /opt/atlassian                                                               | false    |
