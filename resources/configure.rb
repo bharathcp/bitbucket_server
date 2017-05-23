@@ -8,7 +8,7 @@ property :product, String, default: 'bitbucket'
 property :home_path, String, default: '/var/atlassian/application-data/bitbucket'
 property :bitbucket_user, String, default: 'atlbitbucket'
 property :bitbucket_group, String, default: 'atlbitbucket'
-property :bitbucket_properties, Hash, required: false
+property :bitbucket_properties, Hash, required: true
 
 action :create do
   directory "#{new_resource.home_path}/shared" do

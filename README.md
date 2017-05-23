@@ -25,23 +25,51 @@ The should be added as a dependency in your wrapper cookbook. Then you can use t
 #### `bitbucket_install`
 This resource installs a bitbucket server and sets the `BITBUCKET_HOME`. It expects the `JAVA_HOME` to be set. If it is not, then `jre_home` has to be set as an attribute. The usage is:
 ```
-bitbucket_install 'bitbucket'
+bitbucket_install 'bitbucket' do
+  jre_home "#{node['java']['java_home']}/jre"
+end
 ```
 Below are the possible attributes:
-|Property       |String|default                                                                      |
-|:-------------:|:----:|-----------------------------------------------------------------------------|
-|product        |String|bitbucket                                                                    |
-|version        |String|5.0.1                                                                        |
-|bitbucket_user |String|atlbitbucket                                                                 |
-|bitbucket_group|String|atlbitbucket                                                                 |
-|home_path      |String|/var/atlassian/application-data/bitbucket                                    |
-|install_path   |String|/opt/atlassian                                                               |
-|checksum       |String|677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad             |
-|url_base       |String|http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket |
-|jre_home       |String|                                                                             |
+
+| Property        | String | default                                                                      | required |
+|:-------------:  |:------:|------------------------------------------------------------------------------|----------|
+| product         | String | bitbucket                                                                    | false    |
+| version         | String | 5.0.1                                                                        | false    |
+| bitbucket_user  | String | atlbitbucket                                                                 | false    |
+| bitbucket_group | String | atlbitbucket                                                                 | false    |
+| home_path       | String | /var/atlassian/application-data/bitbucket                                    | false    |
+| install_path    | String | /opt/atlassian                                                               | false    |
+| checksum        | String | 677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad             | false    |
+| url_base        | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket | false    |
+| jre_home        | String |                                                                              | false    |
 
 
 #### `bitbucket_config`
+This resource configures an already installed bitbucket. The configurations can be provided as a `Hash`. Below is the usage:
+```
+bitbucket_config 'bitbucket' do
+  bitbucket_properties node['bitbucket']['properties']
+end
+```
+or
+```
+bitbucket_config 'bitbucket' do
+  bitbucket_properties {'setup.displayName' => 'aasdasd','setup.baseUrl' => 'http://localhost:7990'}
+end
+```
+
+Below are the possible attributes:
+
+| Property             | String | default                                                                      | required |
+|:--------------------:|:------:|------------------------------------------------------------------------------|----------|
+| product              | String | bitbucket                                                                    | false    |
+| bitbucket_user       | String | atlbitbucket                                                                 | false    |
+| bitbucket_group      | String | atlbitbucket                                                                 | false    |
+| home_path            | String | /var/atlassian/application-data/bitbucket                                    | false    |
+| bitbucket_properties | Hash   |                                                                              | true     |
+
+To check the possible configurations to set in the Hash refer to *[Bitbucket Documentation](https://confluence.atlassian.com/bitbucketserver) > Administering Bitbucket Server > Bitbucket Server config properties*.
+At the minimum it is useful to configure the setup properties mentioned in *[Bitbucket Documentation](https://confluence.atlassian.com/bitbucketserver) > Install or upgrade Bitbucket Server > Bitbucket Server installation guide > Automated setup for Bitbucket Server*.
 #### `bitbucket_service`
 
 
