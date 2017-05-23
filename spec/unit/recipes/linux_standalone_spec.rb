@@ -12,7 +12,7 @@ describe 'bitbucket_server::linux_standalone' do
       # for a complete list of available platforms and versions see:
       # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
-      runner.converge('bitbucket_server::service_init',described_recipe)
+      runner.converge('bitbucket_server::service_init', described_recipe)
     end
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
@@ -52,8 +52,6 @@ describe 'bitbucket_server::linux_standalone' do
       )
     end
     it 'installs bitbucket' do
-      path = '/var/atlassian/application-data/bitbucket'
-      user = 'atlbitbucket'
       expect(chef_run).to install_ark 'bitbucket'
     end
   end

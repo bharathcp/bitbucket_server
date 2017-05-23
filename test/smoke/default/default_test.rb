@@ -19,14 +19,14 @@ control 'check-perl' do
   perl_ver = command('perl -e "print $]"')
   describe perl_out do
     its('exit_status') { should eq 0 }
-    its('stdout') { should match (/USE_64_BIT_ALL/) }
-    its('stdout') { should match (/useposix=true/) }
-    its('stdout') { should match (/-fstack-protector/) }
+    its('stdout') { should match /USE_64_BIT_ALL/ }
+    its('stdout') { should match /useposix=true/ }
+    its('stdout') { should match /-fstack-protector/ }
   end
   get_perl_ver = perl_ver.stdout.to_f
   describe get_perl_ver do
     it { should be > 5.010 }
-  end 
+  end
 end
 
 describe package('perl') do
@@ -44,7 +44,7 @@ end
 
 describe file('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties') do
   it { should exist }
-  #its('user') { should eq 'atlbitbucket' }
+  # its('user') { should eq 'atlbitbucket' }
   its('content') { should include 'setup.displayName' }
 end
 
@@ -56,25 +56,19 @@ unless os.windows?
     it { should exist }
   end
   describe service('bitbucket') do
-    it { should be_installed}
-    it { should be_enabled}
-    it { should be_running}
+    it { should be_installed }
+    it { should be_enabled }
+    it { should be_running }
   end
 end
 
 describe port(7990) do
   it { should be_listening }
   its('protocols') { should include 'tcp6' }
-  its('processes') {should include 'java'}
+  its('processes') { should include 'java' }
 end
 
 describe port(7992) do
-  it { should be_listening }
-  its('processes') { should include 'java' }
-  its('protocols') { should include 'tcp6' }
-end
-
-describe port(7999) do
   it { should be_listening }
   its('processes') { should include 'java' }
   its('protocols') { should include 'tcp6' }

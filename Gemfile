@@ -8,8 +8,8 @@ end
 
 group :test do
   gem 'chefspec'
+  gem 'cookstyle'
   gem 'foodcritic'
-  gem 'rubocop'
 end
 
 group :integration do
