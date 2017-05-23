@@ -6,9 +6,3 @@
 bitbucket_install 'bitbucket' do
   jre_home "#{node['java']['java_home']}/jre"
 end
-
-bitbucket_config 'bitbucket' do
-  bitbucket_properties node['bitbucket']['properties']
-end
-
-bitbucket_service 'bitbucket'

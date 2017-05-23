@@ -2,6 +2,8 @@
 # Cookbook:: bitbucket_server
 # Resource:: configure
 #
+resource_name :bitbucket_config
+
 property :product, String, default: 'bitbucket'
 property :home_path, String, default: '/var/atlassian/application-data/bitbucket'
 property :bitbucket_user, String, default: 'atlbitbucket'

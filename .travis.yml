@@ -21,4 +21,5 @@ before_script:
 
 script:
   - chef exec bundle exec rake style
+  - chef exec bundle exec rake unit
   - KITCHEN_LOCAL_YAML=./.kitchen.dokken.yml chef exec kitchen test
