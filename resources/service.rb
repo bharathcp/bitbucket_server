@@ -2,6 +2,8 @@
 # Cookbook:: bitbucket_server
 # Resource:: service
 #
+resource_name :bitbucket_service
+
 property :product, String, default: 'bitbucket'
 property :install_path, String, default: '/opt/atlassian'
 property :bitbucket_user, String, default: 'atlbitbucket'

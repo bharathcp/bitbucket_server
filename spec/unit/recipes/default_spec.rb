@@ -7,21 +7,20 @@
 require 'spec_helper'
 
 describe 'bitbucket_server::default' do
-  context 'When all attributes are default, on an Ubuntu 16.04' do
+  context 'Without stepping into custom resources' do
     let(:chef_run) do
-      # for a complete list of available platforms and versions see:
-      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
-      runner.converge(described_recipe)
+      ChefSpec::ServerRunner.new() do |node, server|
+        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        server.update_node(node)
+      end.converge(described_recipe)
     end
 
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
-    end
-    it 'should include necessary recipes' do
-      expect(chef_run).to include_recipe('bitbucket_server::linux_standalone')
-      expect(chef_run).to include_recipe('bitbucket_server::configuration')
-      expect(chef_run).to include_recipe('bitbucket_server::service_init')
+      expect(chef_run).to install_bitbucket('bitbucket').with_jre_home('/usr/lib/jvm/java-8-oracl/jre')
+      expect(chef_run).to config_bitbucket('bitbucket').with_bitbucket_properties('setup.displayName' => 'my bitbucket')
+      expect(chef_run).to service_bitbucket('bitbucket')
     end
   end
 end
