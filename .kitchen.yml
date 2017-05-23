@@ -1,9 +1,15 @@
 ---
 driver:
-  name: docker
+  name: vagrant
   use_sudo: false
-  privileged: true
-
+  network:
+    - ["forwarded_port", {guest: 7990, host: 7990}]
+    - ["forwarded_port", {guest: 7999, host: 7999}]
+    - ["forwarded_port", {guest: 7992, host: 7992}]
+    - ["forwarded_port", {guest: 7993, host: 7993}]
+  vm_hostname: "default-centos-72.vagrantup.com"
+  customize:
+    memory: 2048
 provisioner:
   name: chef_zero
   # You may wish to disable always updating cookbooks in CI or other testing environments.
@@ -17,10 +23,6 @@ verifier:
 platforms:
 #  - name: ubuntu-16.04
   - name: centos-7.3
-    driver_config:
-      image: centos/systemd
-      privileged: true
-      #run_command: /usr/sbin/init
 
 suites:
   - name: default
@@ -35,14 +37,15 @@ suites:
       java:
         install_flavor: 'oracle'
         jdk_version: '8'
+        java_home: "/usr/lib/jvm/java-8-oracle"
         oracle:
           accept_oracle_download_terms: true
       git:
         version: '2.8.1'
       bitbucket:
         properties: {"setup.displayName":           "MyBitbucket",
-                     "setup.baseUrl":               "localhost:7990",
-                     "setup.license":               "mylicensestring",
+                     "setup.baseUrl":               "http://localhost:7990",
+                     "setup.license":               "my license",
                      "setup.sysadmin.username":     "admin",
                      "setup.sysadmin.password":     "adminpwd",
                      "setup.sysadmin.displayName":  "admin",

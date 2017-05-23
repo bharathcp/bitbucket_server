@@ -5,6 +5,12 @@
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
 
-include_recipe 'bitbucket_server::linux_standalone'
-#include_recipe 'bitbucket_server::configuration'
-#include_recipe 'bitbucket_server::service_init'
+bitbucket_server_install 'bitbucket' do
+  jre_home "#{node['java']['java_home']}/jre"
+end
+
+bitbucket_server_configure 'bitbucket' do
+  bitbucket_properties node['bitbucket']['properties']
+end
+
+bitbucket_server_service 'bitbucket'

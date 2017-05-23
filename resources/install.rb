@@ -2,38 +2,15 @@
 # Cookbook:: bitbucket_server
 # Resource:: install
 #
-resource_name :bitbucket_server
-property :server_name, String, name_property: true
-property :version, String, default: '5.0.1'
 property :product, String, default: 'bitbucket'
-property :install_path, String, default: '/opt/atlassian' 
-property :home_path, String, default: '/var/atlassian/application-data/bitbucket'
-property :bin_path, String, default: '/opt/atlassian/bitbucket/bin'
-property :install_type, String, default: 'standalone' # would prefer to call this server type
-property :checksum, String, default: '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
-property :service_type, String, default: 'init'
-property :url_base, String, default: 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket'
-# write a method to get full url and for bin path & ssh host name
+property :version, String, default: '5.0.1'
 property :bitbucket_user, String, default: 'atlbitbucket'
 property :bitbucket_group, String, default: 'atlbitbucket'
-property :database_type, String, default: 'postgresql'
-property :database_version, String, default: '' 
-property :database_host, String, default: '127.0.0.1'
-property :database_name, String, default: 'bitbucket'
-property :database_password, String, default: 'bitbucket'
-property :database_testInterval, String, default: '2'
-property :database_user, String, default: 'bitbucket'
-property :database_port, String, default: ''
-property :jvm_minimum_memory , String, default: '512m'
-property :jvm_maximum_memory , String, default: '768m'
-property :jvm_maximum_permgen, String, default: '384m'
-property :jvm_java_opts, String, default: ''
-property :jvm_support_args, String, default: ''
-#property :ssh_hostname, String, default: '
-property :ssh_port, String, default: '7999'
-property :tomcat_port, String, default: '7990'
-property :tomcat_session_timeout, String, default: '30'
-
+property :home_path, String, default: "/var/atlassian/application-data/bitbucket"
+property :install_path, String, default: '/opt/atlassian'
+property :checksum, String, default: '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
+property :url_base, String, default: "http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket"
+property :jre_home, String
 
 action :install do
   validate_version
@@ -88,8 +65,29 @@ action :install do
     group new_resource.bitbucket_group
   end
 
-  test_exit
+  template "#{new_resource.install_path}/bitbucket/bin/set-bitbucket-home.sh" do
+    source 'set-bitbucket-home.sh.erb'
+    owner new_resource.bitbucket_user
+    group new_resource.bitbucket_group
+    mode 00755
+    action :create
+    variables(
+      :home_path => new_resource.home_path
+    )
+    #notifies :restart, "service[new_resource.product]", :delayed
+  end
 
+  template "#{new_resource.install_path}/bitbucket/bin/set-jre-home.sh" do
+    source 'set-jre-home.sh.erb'
+    owner new_resource.bitbucket_user
+    group new_resource.bitbucket_group
+    mode 00755
+    action :create
+    variables(
+      :jre_home => new_resource.jre_home
+    )
+    #notifies :restart, "service[new_resource.product]", :delayed
+  end
 end
 
 action_class.class_eval do
@@ -104,8 +102,5 @@ action_class.class_eval do
      return "#{new_resource.url_base}-#{new_resource.version}.tar.gz" 
   end
   
-  def test_exit
-     Chef::Log.fatal("exit !!")
-  end
 end
 
