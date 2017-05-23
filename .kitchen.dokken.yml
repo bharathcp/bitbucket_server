@@ -4,6 +4,8 @@ driver:
   chef_version: current
   forward:
   - 7990:7990
+  - 7992:7992
+  - 7993:7993
   - 7999:7999
   memory: 2048
 transport:
