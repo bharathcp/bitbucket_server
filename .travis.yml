@@ -9,6 +9,10 @@ addons:
 
 services: docker
 
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install vagrant
+
 install:
   - chef exec bundle install
 before_script:
