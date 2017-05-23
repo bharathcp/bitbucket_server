@@ -70,8 +70,21 @@ Below are the possible attributes:
 
 To check the possible configurations to set in the Hash refer to *[Bitbucket Documentation](https://confluence.atlassian.com/bitbucketserver) > Administering Bitbucket Server > Bitbucket Server config properties*.
 At the minimum it is useful to configure the setup properties mentioned in *[Bitbucket Documentation](https://confluence.atlassian.com/bitbucketserver) > Install or upgrade Bitbucket Server > Bitbucket Server installation guide > Automated setup for Bitbucket Server*.
-#### `bitbucket_service`
 
+#### `bitbucket_service`
+This resource is used to create a systemd service config. It will `create`, `enable` and `start` the service. The name of the service is set by the property `product`. Below is the usage:
+
+```
+bitbucket_service 'bitbucket'
+```
+
+Below are the possible attributes:
+
+| Property             | String | default                                                                      | required |
+|:--------------------:|:------:|------------------------------------------------------------------------------|----------|
+| product              | String | bitbucket                                                                    | false    |
+| bitbucket_user       | String | atlbitbucket                                                                 | false    |
+| install_path         | String | /opt/atlassian                                                               | false    |
 
 ## Testing
 chef exec bundle install
