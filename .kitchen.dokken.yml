@@ -25,6 +25,7 @@ platforms:
     run_list:
       - recipe[java]
       - recipe[git::source]
+      - recipe[bitbucket_server::default]
     verifier:
       inspec_tests:
         - test/smoke/default

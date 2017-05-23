@@ -2,6 +2,7 @@
 # Cookbook:: bitbucket_server
 # Resource:: install
 #
+property :product, String, default: 'bitbucket'
 property :version, String, default: '5.0.1'
 property :bitbucket_user, String, default: 'atlbitbucket'
 property :bitbucket_group, String, default: 'atlbitbucket'
