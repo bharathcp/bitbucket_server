@@ -1,6 +1,6 @@
 name 'bitbucket_server'
 maintainer 'Bharath, Raghavendra Gona'
-maintainer_email 'you@gmail.com'
+maintainer_email 'cippy.bharath@gmail.com'
 license 'Apache-2.0'
 description 'Installs/Configures bitbucket_server'
 long_description 'Installs/Configures bitbucket_server'
