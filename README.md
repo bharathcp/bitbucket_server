@@ -1,6 +1,8 @@
 # Bitbucket server cookbook
- 
+
+[![Cookbook](http://img.shields.io/cookbook/v/nginx.svg)](https://github.com/bharathcp/bitbucket_server)
 ![Build Status](https://travis-ci.org/bharathcp/bitbucket_server.svg?branch=master)
+[![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Requirements
 
@@ -26,7 +28,7 @@ This is a library cookbook. You can use the resources it provides in your wrappe
 ### Custom resources
 #### `bitbucket_install`
 This resource installs a bitbucket server and sets the `BITBUCKET_HOME`. It expects the `JAVA_HOME` to be set. If it is not, then `jre_home` has to be set as an attribute. The usage is:
-```
+```ruby
 bitbucket_install 'bitbucket' do
   jre_home "#{node['java']['java_home']}/jre"
 end
@@ -48,13 +50,13 @@ Below are the attributes supported by this resource:
 
 #### `bitbucket_config`
 This resource configures an already installed bitbucket. The configurations can be provided as a `Hash`. Below is the usage:
-```
+```ruby
 bitbucket_config 'bitbucket' do
   bitbucket_properties node['bitbucket']['properties']
 end
 ```
 or
-```
+```ruby
 bitbucket_config 'bitbucket' do
   bitbucket_properties {'setup.displayName' => 'aasdasd','setup.baseUrl' => 'http://localhost:7990'}
 end
@@ -76,7 +78,7 @@ At the minimum it is useful to configure the setup properties mentioned in *[Bit
 #### `bitbucket_service`
 This resource is used to create a systemd service config. It will `create`, `enable` and `start` the service. The name of the service is set by the property `product`. Below is the usage:
 
-```
+```ruby
 bitbucket_service 'bitbucket'
 ```
 
@@ -92,33 +94,43 @@ Below are the attributes supported by this resource:
 chef exec bundle install
 
 To check rake tasks
-```
+```bash
 chef exec bundle exec rake --tasks
 ```
 
 To execute lynt and unit tests
-```
+```bash
 chef exec bundle exec rake style
 ```
 
 To execute Integration tests
-```
+```bash
 rake integration:kitchen:default-centos-73
 ```
 
 To directly use Kitchen
-```
+```bash
 chef exec kitchen verify   default-centos-73
 ```
 
 ## License and Author
 
 Author: Bharath Prakash (cippy.bharath@gmail.com)
+
 Author: Raghavendra Gona (graghav@gmail.com)
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
 ```
-http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
