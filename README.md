@@ -111,7 +111,7 @@ To directly use Kitchen
 chef exec kitchen verify   default-centos-73
 ```
 
-##License and Author
+## License and Author
 
 Author: Bharath Prakash (cippy.bharath@gmail.com)
 Author: Raghavendra Gona (graghav@gmail.com)
