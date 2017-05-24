@@ -47,6 +47,11 @@ Below are the attributes supported by this resource:
 | url_base        | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket | false    |
 | jre_home        | String |                                                                              | false    |
 
+To unit test the usage of this resource you can use `install_bitbucket` matcher in chefspec like:
+
+```ruby
+  expect(chef_run).to install_bitbucket('bitbucket').with_jre_home('/usr/lib/jvm/java-8-oracl/jre')
+```
 
 #### `bitbucket_config`
 This resource configures an already installed bitbucket. The configurations can be provided as a `Hash`. Below is the usage:
@@ -72,6 +77,12 @@ Below are the attributes supported by this resource:
 | home_path            | String | /var/atlassian/application-data/bitbucket                                    | false    |
 | bitbucket_properties | Hash   |                                                                              | true     |
 
+To unit test the usage of this resource you can use `config_bitbucket` matcher in chefspec like:
+
+```ruby
+  expect(chef_run).to config_bitbucket('bitbucket').with_bitbucket_properties('setup.displayName' => 'my bitbucket')
+```
+
 To check the possible configurations to set in the Hash refer to *[Bitbucket Documentation](https://confluence.atlassian.com/bitbucketserver) > Administering Bitbucket Server > Bitbucket Server config properties*.
 At the minimum it is useful to configure the setup properties mentioned in *[Bitbucket Documentation](https://confluence.atlassian.com/bitbucketserver) > Install or upgrade Bitbucket Server > Bitbucket Server installation guide > Automated setup for Bitbucket Server*.
 
@@ -89,6 +100,13 @@ Below are the attributes supported by this resource:
 | product              | String | bitbucket                                                                    | false    |
 | bitbucket_user       | String | atlbitbucket                                                                 | false    |
 | install_path         | String | /opt/atlassian                                                               | false    |
+
+To unit test the usage of this resource you can use `service_bitbucket` matcher in chefspec like:
+
+```ruby
+  expect(chef_run).to service_bitbucket('bitbucket')
+```
+
 
 ## Testing
 chef exec bundle install
