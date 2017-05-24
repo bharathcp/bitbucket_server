@@ -21,3 +21,7 @@ group :integration do
   gem 'inspec'
   gem 'kitchen-inspec'
 end
+
+group :release do
+  gem 'stove', '~> 5.2.0'
+end
