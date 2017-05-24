@@ -15,11 +15,13 @@ Chef 12.4+
 - git
 - java
 
+*Note: We intend to remove java and git dependancies from this cook book in future.*
+
 ## Bitbucket version
 This cookbook only supports bitbucket server versions of 5.0.0 and above
 
 ## Usage
-The should be added as a dependency in your wrapper cookbook. Then you can use the below resources to install and configure bitbucket server. 
+This is a library cookbook. You can use the resources it provides in your wrapper cookbook / recipe.
 
 ### Custom resources
 #### `bitbucket_install`
@@ -29,7 +31,7 @@ bitbucket_install 'bitbucket' do
   jre_home "#{node['java']['java_home']}/jre"
 end
 ```
-Below are the possible attributes:
+Below are the attributes supported by this resource:
 
 | Property        | String | default                                                                      | required |
 |-----------------|:------:|------------------------------------------------------------------------------|----------|
@@ -58,7 +60,7 @@ bitbucket_config 'bitbucket' do
 end
 ```
 
-Below are the possible attributes:
+Below are the attributes supported by this resource:
 
 | Property             | String | default                                                                      | required |
 |----------------------|:------:|------------------------------------------------------------------------------|----------|
@@ -78,7 +80,7 @@ This resource is used to create a systemd service config. It will `create`, `ena
 bitbucket_service 'bitbucket'
 ```
 
-Below are the possible attributes:
+Below are the attributes supported by this resource:
 
 | Property             | String | default                                                                      | required |
 |----------------------|:------:|------------------------------------------------------------------------------|----------|
@@ -94,12 +96,12 @@ To check rake tasks
 chef exec bundle exec rake --tasks
 ```
 
-Below runs rubocop & foodcritic
+To execute lynt and unit tests
 ```
 chef exec bundle exec rake style
 ```
 
-For Integ test
+To execute Integration tests
 ```
 rake integration:kitchen:default-centos-73
 ```
@@ -107,4 +109,16 @@ rake integration:kitchen:default-centos-73
 To directly use Kitchen
 ```
 chef exec kitchen verify   default-centos-73
+```
+
+##License and Author
+
+Author: Bharath Prakash (cippy.bharath@gmail.com)
+Author: Raghavendra Gona (graghav@gmail.com)
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+```
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 ```
