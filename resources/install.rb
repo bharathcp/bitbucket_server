@@ -23,6 +23,7 @@ action :install do
     mode 00755
     action :create
     recursive true
+    not_if { ::Dir.exist?(new_resource.home_path) }
   end
 
   group new_resource.bitbucket_group do
