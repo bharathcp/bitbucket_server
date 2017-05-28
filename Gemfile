@@ -14,12 +14,12 @@ end
 
 group :integration do
   gem 'busser-serverspec', '~> 0.2.6'
-  gem 'kitchen-vagrant', '~> 0.15'
+  gem 'inspec'
   gem 'kitchen-docker'
   gem 'kitchen-dokken'
-  gem 'test-kitchen', '~> 1.3'
-  gem 'inspec'
   gem 'kitchen-inspec'
+  gem 'kitchen-vagrant', '~> 0.15'
+  gem 'test-kitchen', '~> 1.3'
 end
 
 group :release do

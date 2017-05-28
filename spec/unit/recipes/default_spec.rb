@@ -9,7 +9,7 @@ require 'spec_helper'
 describe 'bitbucket_server::default' do
   context 'Without stepping into custom resources' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new() do |node, server|
+      ChefSpec::ServerRunner.new do |node, server|
         node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
         node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
         server.update_node(node)
