@@ -10,7 +10,14 @@ property :bitbucket_user, String, default: 'atlbitbucket'
 property :bitbucket_group, String, default: 'atlbitbucket'
 property :home_path, String, default: '/var/atlassian/application-data/bitbucket'
 property :install_path, String, default: '/opt/atlassian'
-property :checksum, String, default: '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
+property :checksum, String, default: lazy {
+                                       case version
+                                       when '5.0.1'
+                                         '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
+                                       when '5.0.0'
+                                         'a1505e06dc126279c710ce6c289fc41b078bab5de0beff44fc27bd17339ebdf9'
+                                       end
+                                     }
 property :url_base, String, default: 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket'
 property :jre_home, String
 
@@ -66,6 +73,7 @@ action :install do
     version new_resource.version
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
+    notifies :restart, "service[#{new_resource.product}]", :delayed
   end
 
   template "#{new_resource.install_path}/bitbucket/bin/set-bitbucket-home.sh" do
@@ -77,7 +85,7 @@ action :install do
     variables(
       home_path: new_resource.home_path
     )
-    # notifies :restart, "service[new_resource.product]", :delayed
+    notifies :restart, "service[#{new_resource.product}]", :delayed
   end
 
   template "#{new_resource.install_path}/bitbucket/bin/set-jre-home.sh" do
@@ -89,7 +97,13 @@ action :install do
     variables(
       jre_home: new_resource.jre_home
     )
-    # notifies :restart, "service[new_resource.product]", :delayed
+    notifies :restart, "service[#{new_resource.product}]", :delayed
+  end
+
+  service new_resource.product do
+    supports restart: true, start: true, stop: true, status: true
+    action [:nothing]
+    only_if "service #{new_resource.product} status"
   end
 end
 
