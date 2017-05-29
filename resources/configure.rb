@@ -65,7 +65,7 @@ action :create do
       variables(
         properties: new_resource.bitbucket_properties
       )
-      # notifies :restart, "service[#{new_resource.product}]", :delayed
+      notifies :restart, "service[#{new_resource.product}]", :delayed
     end
 
     # This is to ensure idempotence after the first setup. Bitbucket creates this
@@ -83,5 +83,11 @@ action :create do
       )
       only_if { ::File.exist?("#{new_resource.home_path}/shared/bitbucket.properties.bak") }
     end
+  end
+
+  service new_resource.product do
+    supports restart: true, start: true, stop: true, status: true
+    action [:nothing]
+    only_if "service #{new_resource.product} status"
   end
 end
