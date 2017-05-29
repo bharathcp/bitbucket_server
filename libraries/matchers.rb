@@ -1,8 +1,4 @@
 if defined?(ChefSpec)
-  def put_ark(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:ark, :put, resource_name)
-  end
-
   def install_bitbucket(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:bitbucket_install, :install, resource_name)
   end
