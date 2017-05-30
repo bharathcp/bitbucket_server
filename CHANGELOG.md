@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the bitbucket server cookbook.
 
-## 0.1.4 (2017-05-30)
+## 0.1.5 (2017-05-30)
 
 - Corrected documentation - Readme.md (fixes [#12](/bharathcp/bitbucket_server/issues/12))
 - Added matchers for the custom resources - `bitbucket_server_install`, `bitbucket_server_config`, `bitbucket_server_service` in library. (fixes [#11](/bharathcp/bitbucket_server/issues/11))
