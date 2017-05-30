@@ -25,3 +25,6 @@ Policyfile.lock.json
 .idea
 
 Vagrantfile
+
+.chef/
+.chef/knife.rb
