@@ -1,6 +1,6 @@
-# tomcat Cookbook CHANGELOG
+# bitbucket server Cookbook CHANGELOG
 
-This file is used to list changes made in each version of the tomcat cookbook.
+This file is used to list changes made in each version of the bitbucket server cookbook.
 
 ## 0.1.4 (2017-05-30)
 
