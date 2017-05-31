@@ -28,3 +28,4 @@ Vagrantfile
 
 .chef/
 .chef/knife.rb
+removeTags.sh
