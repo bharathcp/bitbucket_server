@@ -27,7 +27,7 @@ describe 'bitbucket_server::default' do
   end
   context 'Step into custom resources and default values' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(step_into: ['bitbucket_install','bitbucket_config','bitbucket_service'], platform: 'centos', version: '7.3.1611') do |node, server|
+      ChefSpec::ServerRunner.new(step_into: %w(bitbucket_install bitbucket_config bitbucket_service), platform: 'centos', version: '7.3.1611') do |node, server|
         node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
         node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
         server.update_node(node)
@@ -46,12 +46,16 @@ describe 'bitbucket_server::default' do
     it 'installs bitbucket' do
       expect(chef_run).to create_directory('/var/atlassian/application-data/bitbucket')
         .with_user('atlbitbucket').with_mode(00755)
+
       expect(chef_run).to create_group('atlbitbucket').with_append(true)
+
       expect(chef_run).to create_user('atlbitbucket')
         .with_gid('atlbitbucket').with_home('/var/atlassian/application-data/bitbucket')
         .with_shell('/bin/bash').with_manage_home(true).with_system(true)
+
       expect(chef_run).to create_directory('/opt/atlassian')
         .with_user('atlbitbucket').with_mode(00755)
+
       expect(chef_run).to install_ark('bitbucket')
         .with_url('http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket-5.0.1.tar.gz')
         .with_prefix_root('/opt/atlassian')
@@ -61,7 +65,40 @@ describe 'bitbucket_server::default' do
         .with_owner('atlbitbucket')
         .with_group('atlbitbucket')
 
+      expect(chef_run).to create_template('/opt/atlassian/bitbucket/bin/set-bitbucket-home.sh')
+        .with_source('set-bitbucket-home.sh.erb')
+        .with_owner('atlbitbucket')
+        .with_group('atlbitbucket')
+        .with_mode(00755)
+        .with_variables(home_path: '/var/atlassian/application-data/bitbucket')
+        .with_cookbook('bitbicket_server')
+      expect(chef_run.template('/opt/atlassian/bitbucket/bin/set-bitbucket-home.sh'))
+        .to notify('service[bitbucket]').to(:restart).delayed
+
+      expect(chef_run).to create_template('/opt/atlassian/bitbucket/bin/set-jre-home.sh')
+        .with_source('set-jre-home.sh.erb')
+        .with_owner('atlbitbucket')
+        .with_group('atlbitbucket')
+        .with_mode(00755)
+        .with_variables(jre_home: '/usr/lib/jvm/java-8-oracl/jre')
+        .with_cookbook('bitbicket_server')
+      expect(chef_run.template('/opt/atlassian/bitbucket/bin/set-jre-home.sh'))
+        .to notify('service[bitbucket]').to(:restart).delayed
+
+      expect(chef_run.service('bitbucket')).to do_nothing
     end
 
+    it 'configures bitbucket' do
+      expect(chef_run).to create_directory('/var/atlassian/application-data/bitbucket/shared')
+        .with_user('atlbitbucket').with_mode(00755)
+
+      expect(chef_run).to create_template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties')
+        .with_source('bitbucket.properties.erb')
+        .with_owner('atlbitbucket')
+        .with_group('atlbitbucket')
+        .with_mode(00644)
+        .with_variables(properties: { 'setup.displayName' => 'my bitbucket' })
+        .with_cookbook('bitbicket_server')
+    end
   end
 end

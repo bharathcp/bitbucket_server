@@ -51,6 +51,7 @@ action :create do
     variables(
       properties: new_resource.bitbucket_properties
     )
+    cookbook 'bitbicket_server'
     only_if { ::File.exist?("#{new_resource.home_path}/shared/bitbucket.properties.bak") }
     # notifies :restart, "service[#{new_resource.product}]", :delayed
   end
@@ -65,6 +66,7 @@ action :create do
       variables(
         properties: new_resource.bitbucket_properties
       )
+      cookbook 'bitbicket_server'
       notifies :restart, "service[#{new_resource.product}]", :delayed
     end
 
@@ -81,6 +83,7 @@ action :create do
       variables(
         properties: new_resource.bitbucket_properties
       )
+      cookbook 'bitbicket_server'
       only_if { ::File.exist?("#{new_resource.home_path}/shared/bitbucket.properties.bak") }
     end
   end

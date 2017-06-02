@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the bitbucket server cookbook.
 
+## 0.1.5 (2017-05-02)
+- fixes [#36](/bharathcp/bitbucket_server/issues/36) - The error on using bitbucket_install and bitbucket_config is resolved
 ## 0.1.4 (2017-05-30)
 
 - Corrected documentation - Readme.md (fixes [#12](/bharathcp/bitbucket_server/issues/12))
