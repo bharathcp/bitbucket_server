@@ -29,7 +29,7 @@ suites:
     run_list:
       - recipe[java]
       - recipe[git::source]
-      - recipe[bitbucket_server::default]
+      - recipe[test::default]
     verifier:
       inspec_tests:
         - test/smoke/default

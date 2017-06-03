@@ -85,7 +85,7 @@ action :install do
     variables(
       home_path: new_resource.home_path
     )
-    cookbook 'bitbicket_server'
+    cookbook 'bitbucket_server'
     notifies :restart, "service[#{new_resource.product}]", :delayed
   end
 
@@ -98,7 +98,7 @@ action :install do
     variables(
       jre_home: new_resource.jre_home
     )
-    cookbook 'bitbicket_server'
+    cookbook 'bitbucket_server'
     notifies :restart, "service[#{new_resource.product}]", :delayed
   end
 

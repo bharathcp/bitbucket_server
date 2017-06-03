@@ -6,7 +6,7 @@
 
 require 'spec_helper'
 
-describe 'bitbucket_server::default' do
+describe 'test::default' do
   context 'Without stepping into custom resources and default values' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'centos', version: '7.3.1611') do |node, server|
@@ -71,7 +71,7 @@ describe 'bitbucket_server::default' do
         .with_group('atlbitbucket')
         .with_mode(00755)
         .with_variables(home_path: '/var/atlassian/application-data/bitbucket')
-        .with_cookbook('bitbicket_server')
+        .with_cookbook('bitbucket_server')
       expect(chef_run.template('/opt/atlassian/bitbucket/bin/set-bitbucket-home.sh'))
         .to notify('service[bitbucket]').to(:restart).delayed
 
@@ -81,7 +81,7 @@ describe 'bitbucket_server::default' do
         .with_group('atlbitbucket')
         .with_mode(00755)
         .with_variables(jre_home: '/usr/lib/jvm/java-8-oracl/jre')
-        .with_cookbook('bitbicket_server')
+        .with_cookbook('bitbucket_server')
       expect(chef_run.template('/opt/atlassian/bitbucket/bin/set-jre-home.sh'))
         .to notify('service[bitbucket]').to(:restart).delayed
 
@@ -98,7 +98,7 @@ describe 'bitbucket_server::default' do
         .with_group('atlbitbucket')
         .with_mode(00644)
         .with_variables(properties: { 'setup.displayName' => 'my bitbucket' })
-        .with_cookbook('bitbicket_server')
+        .with_cookbook('bitbucket_server')
     end
   end
 end
