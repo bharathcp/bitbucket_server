@@ -5,6 +5,9 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
+puts 'Sleeping to make sure the services are started'
+sleep 10
+
 describe command('which java') do
   its('exit_status') { should eq 0 }
 end

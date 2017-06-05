@@ -24,28 +24,3 @@ platforms:
       pid_one_command: /sbin/init
       intermediate_instructions:
         - RUN yum -y install which initscripts net-tools wget curl java git
-    run_list:
-      - recipe[java]
-      - recipe[git::source]
-      - recipe[bitbucket_server::default]
-    verifier:
-      inspec_tests:
-        - test/smoke/default
-    attributes:
-      java:
-        install_flavor: 'oracle'
-        jdk_version: '8'
-        java_home: "/usr/lib/jvm/java-8-oracle"
-        oracle:
-          accept_oracle_download_terms: true
-      git:
-        version: '2.8.1'
-      bitbucket:
-        properties: {"setup.displayName":           "MyBitbucket",
-                     "setup.baseUrl":               "localhost:7990",
-                     "setup.license":               "my license",
-                     "setup.sysadmin.username":     "admin",
-                     "setup.sysadmin.password":     "adminpwd",
-                     "setup.sysadmin.displayName":  "admin",
-                     "setup.sysadmin.emailAddress": "myemail@gmail.com"}
-
