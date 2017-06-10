@@ -130,9 +130,8 @@ describe 'test::default' do
         .with_variables(properties: { 'setup.displayName' => 'my bitbucket' })
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties'))
-              .to notify('service[bitbucket]').to(:restart).delayed
+        .to notify('service[bitbucket]').to(:restart).delayed
     end
-
   end
 
   context 'Step into custom resources with jvm_args defined' do

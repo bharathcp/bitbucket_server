@@ -114,7 +114,7 @@ action :install do
     )
     cookbook 'bitbucket_server'
     notifies :restart, "service[#{new_resource.product}]", :delayed
-    not_if {new_resource.jvm_args.nil?}
+    not_if { new_resource.jvm_args.nil? }
   end
 
   service new_resource.product do
