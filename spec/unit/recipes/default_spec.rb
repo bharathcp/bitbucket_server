@@ -4,8 +4,6 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
-require 'spec_helper'
-
 describe 'test::default' do
   context 'Without stepping into custom resources and default values' do
     let(:chef_run) do

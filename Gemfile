@@ -10,6 +10,8 @@ group :test do
   gem 'chefspec'
   gem 'cookstyle'
   gem 'foodcritic'
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
 end
 
 group :integration do
@@ -23,5 +25,6 @@ group :integration do
 end
 
 group :release do
+  gem 'github_changelog_generator'
   gem 'stove', '~> 5.2.0'
 end

@@ -4,8 +4,6 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
-require 'spec_helper'
-
 describe 'test::specific_version' do
   context 'Step into install resources and test invalid version=nil' do
     let(:chef_run) do
