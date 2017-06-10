@@ -1,4 +1,4 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
-require "simplecov"
+require 'simplecov'
 SimpleCov.start
