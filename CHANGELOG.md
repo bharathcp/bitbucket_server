@@ -6,11 +6,20 @@
 
 **Fixed bugs:**
 
+- add inspec test for server status check [\#23](https://github.com/bharathcp/bitbucket_server/issues/23)
 - Fix Flaky InSpec test [\#14](https://github.com/bharathcp/bitbucket_server/issues/14)
 
 **Closed issues:**
 
+- Allow JVM\_SUPPORT\_RECOMMENDED\_ARGS to be set  [\#39](https://github.com/bharathcp/bitbucket_server/issues/39)
 - wrapper cookbooks cannot find the erb template sources  [\#36](https://github.com/bharathcp/bitbucket_server/issues/36)
+- automated generation of changelog [\#35](https://github.com/bharathcp/bitbucket_server/issues/35)
+- unit test version validation [\#34](https://github.com/bharathcp/bitbucket_server/issues/34)
+- unit test default value of checksum [\#32](https://github.com/bharathcp/bitbucket_server/issues/32)
+
+**Merged pull requests:**
+
+- added unit test for jvm args and refactored test cases [\#40](https://github.com/bharathcp/bitbucket_server/pull/40) ([bharathcp](https://github.com/bharathcp))
 
 ## [v0.1.5](https://github.com/bharathcp/bitbucket_server/tree/v0.1.5) (2017-06-05)
 [Full Changelog](https://github.com/bharathcp/bitbucket_server/compare/v0.1.4...v0.1.5)
