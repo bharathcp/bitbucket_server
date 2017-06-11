@@ -6,6 +6,7 @@
 bitbucket_install 'bitbucket' do
   jre_home "#{node['java']['java_home']}/jre"
   jvm_args node['bitbucket']['jvm_args']
+  version node['bitbucket']['version']
 end
 
 bitbucket_config 'bitbucket' do

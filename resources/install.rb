@@ -20,6 +20,7 @@ property :checksum, String, default: lazy {
                                      }
 property :url_base, String, default: 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket'
 property :jre_home, String
+property :jvm_args, String
 
 action :install do
   validate_version
@@ -100,6 +101,20 @@ action :install do
     )
     cookbook 'bitbucket_server'
     notifies :restart, "service[#{new_resource.product}]", :delayed
+  end
+
+  template "#{new_resource.install_path}/bitbucket/bin/_start-webapp.sh" do
+    source '_start-webapp.sh.erb'
+    owner new_resource.bitbucket_user
+    group new_resource.bitbucket_group
+    mode 00755
+    action :create
+    variables(
+      jvm_args: new_resource.jvm_args
+    )
+    cookbook 'bitbucket_server'
+    notifies :restart, "service[#{new_resource.product}]", :delayed
+    not_if { new_resource.jvm_args.nil? }
   end
 
   service new_resource.product do
