@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/bharathcp/bitbucket_server/tree/HEAD)
-
-[Full Changelog](https://github.com/bharathcp/bitbucket_server/compare/v0.1.5...HEAD)
+## [v0.1.6](https://github.com/bharathcp/bitbucket_server/tree/v0.1.6) (2017-06-11)
+[Full Changelog](https://github.com/bharathcp/bitbucket_server/compare/v0.1.5...v0.1.6)
 
 **Fixed bugs:**
 
