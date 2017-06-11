@@ -10,4 +10,9 @@ if defined?(ChefSpec)
   def service_bitbucket(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:bitbucket_service, :create, resource_name)
   end
+  
+  def install_backup_client(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:install_backup_client, :install, resource_name)
+  end
+
 end

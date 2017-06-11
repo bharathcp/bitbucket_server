@@ -31,6 +31,7 @@ describe 'test::default' do
     it 'creates a bitbucket service' do
       expect(chef_run).to service_bitbucket('bitbucket')
     end
+
   end
 
   context 'Step into custom resources and default values' do
