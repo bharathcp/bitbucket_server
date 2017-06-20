@@ -1,6 +1,6 @@
 # Bitbucket server cookbook
 
-[![Chef cookbook](https://img.shields.io/cookbook/v/chef-sugar.svg)](https://github.com/bharathcp/bitbucket_server)
+[![Chef cookbook](https://img.shields.io/cookbook/v/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server)
 ![Build Status](https://travis-ci.org/bharathcp/bitbucket_server.svg?branch=master)
 [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
