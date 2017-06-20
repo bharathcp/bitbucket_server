@@ -3,7 +3,7 @@
 [![Chef cookbook](https://img.shields.io/cookbook/v/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server)
 ![Build Status](https://travis-ci.org/bharathcp/bitbucket_server.svg?branch=master)
 [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Dependency Status](https://www.versioneye.com/user/projects/5948ddac368b080033afa590/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5948ddac368b080033afa590)
+[![Dependency Status](https://www.versioneye.com/user/projects/5948ddac368b080033afa590/badge.svg)](https://www.versioneye.com/user/projects/5948ddac368b080033afa590)
 
 ## Requirements
 
@@ -47,6 +47,7 @@ Below are the attributes supported by this resource:
 | checksum        | String | 677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad             | false    |
 | url_base        | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket | false    |
 | jre_home        | String |                                                                              | false    |
+| jvm_args        | String |                                                                              | false    |
 
 To unit test the usage of this resource you can use `install_bitbucket` matcher in chefspec like:
 
