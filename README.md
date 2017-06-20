@@ -4,8 +4,8 @@
 ![Build Status](https://travis-ci.org/bharathcp/bitbucket_server.svg?branch=master)
 [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Dependency Status](https://www.versioneye.com/user/projects/5948ed6a6725bd00322511d8/badge.svg)](https://www.versioneye.com/user/projects/5948ed6a6725bd00322511d8)
-[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/bharathcp/bitbucket_server/issues)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/badges/shields.svg)](https://github.com/bharathcp/bitbucket_server/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed%20)
+[![GitHub issues](https://img.shields.io/github/issues/bharathcp/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/bharathcp/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed%20)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/bharathcp/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server/pulls)
 [![GitHub contributors](https://img.shields.io/github/contributors/bharathcp/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server/graphs/contributors)
 
