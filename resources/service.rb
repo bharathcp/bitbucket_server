@@ -24,7 +24,7 @@ action :create do
             'Install' => {
               'WantedBy' => 'multi-user.target',
             })
-    action [:create, :enable, :start]
+    action %i(create enable start)
     verify false
   end
 end

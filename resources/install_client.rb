@@ -31,23 +31,21 @@ action :install do
 
   template "#{new_resource.install_path}/#{new_resource.product}-backup-client/backup-config.properties" do
     source 'backup-config.properties.erb'
-    owner new_resource.bitbucket_user 
-    mode 00755 
+    owner new_resource.bitbucket_user
+    mode 0o0755
     variables backup_client: {
       'user' => new_resource.backup_user,
       'password' => new_resource.backup_password,
       'base_url' => new_resource.bitbucket_url,
       'home_path' => new_resource.home_path,
-      'backup_path' => new_resource.backup_path
+      'backup_path' => new_resource.backup_path,
     }
-   cookbook 'bitbucket_server' 
+    cookbook 'bitbucket_server'
   end
 
-  
   link "#{new_resource.home_path}/shared/backup-config.properties" do
     to "#{new_resource.install_path}/#{new_resource.product}-backup-client/backup-config.properties"
   end
-
 end
 
 action_class.class_eval do

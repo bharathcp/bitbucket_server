@@ -36,7 +36,7 @@ action :create do
   directory "#{new_resource.home_path}/shared" do
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    mode 00755
+    mode 0o0755
     action :create
     recursive true
     # notifies :restart, "service[#{new_resource.product}]", :delayed
@@ -46,7 +46,7 @@ action :create do
     source 'bitbucket.properties.erb'
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    mode 00644
+    mode 0o0644
     action :create
     variables(
       properties: new_resource.bitbucket_properties
@@ -61,7 +61,7 @@ action :create do
       source 'bitbucket.properties.erb'
       owner new_resource.bitbucket_user
       group new_resource.bitbucket_group
-      mode 00644
+      mode 0o0644
       action :create
       variables(
         properties: new_resource.bitbucket_properties
@@ -78,7 +78,7 @@ action :create do
       source 'bitbucket.properties.erb'
       owner new_resource.bitbucket_user
       group new_resource.bitbucket_group
-      mode 00644
+      mode 0o0644
       action :create
       variables(
         properties: new_resource.bitbucket_properties

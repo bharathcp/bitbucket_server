@@ -31,7 +31,6 @@ describe 'test::default' do
     it 'creates a bitbucket service' do
       expect(chef_run).to service_bitbucket('bitbucket')
     end
-
   end
 
   context 'Step into custom resources and default values' do
@@ -54,7 +53,7 @@ describe 'test::default' do
 
     it 'creates bitbucket home directory' do
       expect(chef_run).to create_directory('/var/atlassian/application-data/bitbucket')
-        .with_user('atlbitbucket').with_mode(00755)
+        .with_user('atlbitbucket').with_mode(0o0755)
     end
 
     it 'creates atlbitbucket group' do
@@ -69,7 +68,7 @@ describe 'test::default' do
 
     it 'creates bitbucket install directory' do
       expect(chef_run).to create_directory('/opt/atlassian')
-        .with_user('atlbitbucket').with_mode(00755)
+        .with_user('atlbitbucket').with_mode(0o0755)
     end
 
     it 'ark installs bitbucket package' do
@@ -88,7 +87,7 @@ describe 'test::default' do
         .with_source('set-bitbucket-home.sh.erb')
         .with_owner('atlbitbucket')
         .with_group('atlbitbucket')
-        .with_mode(00755)
+        .with_mode(0o0755)
         .with_variables(home_path: '/var/atlassian/application-data/bitbucket')
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/opt/atlassian/bitbucket/bin/set-bitbucket-home.sh'))
@@ -104,7 +103,7 @@ describe 'test::default' do
         .with_source('set-jre-home.sh.erb')
         .with_owner('atlbitbucket')
         .with_group('atlbitbucket')
-        .with_mode(00755)
+        .with_mode(0o0755)
         .with_variables(jre_home: '/usr/lib/jvm/java-8-oracl/jre')
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/opt/atlassian/bitbucket/bin/set-jre-home.sh'))
@@ -117,7 +116,7 @@ describe 'test::default' do
 
     it 'creates bitbucket shared directory inside bitbucket home' do
       expect(chef_run).to create_directory('/var/atlassian/application-data/bitbucket/shared')
-        .with_user('atlbitbucket').with_mode(00755)
+        .with_user('atlbitbucket').with_mode(0o0755)
     end
 
     it 'configures bitbucket.properties and restart bitbucket service' do
@@ -125,7 +124,7 @@ describe 'test::default' do
         .with_source('bitbucket.properties.erb')
         .with_owner('atlbitbucket')
         .with_group('atlbitbucket')
-        .with_mode(00644)
+        .with_mode(0o0644)
         .with_variables(properties: { 'setup.displayName' => 'my bitbucket' })
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties'))

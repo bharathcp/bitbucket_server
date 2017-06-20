@@ -11,4 +11,3 @@ install_backup_client 'bitbucket' do
   bitbucket_url 'http://localhost:7990'
   backup_path '/tmp'
 end
-

@@ -34,9 +34,8 @@ describe 'test::backup_client' do
       expect(chef_run).to create_template('/opt/atlassian/bitbucket-backup-client/backup-config.properties')
         .with_source('backup-config.properties.erb')
         .with_owner('atlbitbucket')
-        .with_variables(backup_client: { 'user' => 'bitbucket_backup','password' => 'bitbucket_admin', 'base_url' => 'http://localhost:7990','home_path' => '/var/atlassian/application-data/bitbucket','backup_path' => '/tmp' })
+        .with_variables(backup_client: { 'user' => 'bitbucket_backup', 'password' => 'bitbucket_admin', 'base_url' => 'http://localhost:7990', 'home_path' => '/var/atlassian/application-data/bitbucket', 'backup_path' => '/tmp' })
         .with_cookbook('bitbucket_server')
     end
-
   end
 end
