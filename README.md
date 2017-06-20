@@ -3,7 +3,7 @@
 [![Chef cookbook](https://img.shields.io/cookbook/v/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server)
 ![Build Status](https://travis-ci.org/bharathcp/bitbucket_server.svg?branch=master)
 [![License](https://img.shields.io/badge/license-Apache_2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Dependency Status](https://www.versioneye.com/user/projects/5948ddac368b080033afa590/badge.svg)](https://www.versioneye.com/user/projects/5948ddac368b080033afa590)
+[![Dependency Status](https://www.versioneye.com/user/projects/5948ed6a6725bd00322511d8/badge.svg)](https://www.versioneye.com/user/projects/5948ed6a6725bd00322511d8)
 
 ## Requirements
 
