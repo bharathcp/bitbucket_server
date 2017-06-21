@@ -8,7 +8,7 @@ module BitbucketServer
     def validate_version
       return if new_resource.version =~ /\d+.\d+.\d+/
       Chef::Log.fatal("The version must be in MAJOR.MINOR.PATCH format. Passed value: #{new_resource.version}")
-      raise
+      raise "The version must be in MAJOR.MINOR.PATCH format. Passed value: #{new_resource.version}"
     end
   end
 end

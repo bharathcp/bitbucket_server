@@ -52,20 +52,20 @@ describe 'test::default' do
     end
 
     it 'creates bitbucket home directory' do
-      expect(chef_run).to create_directory('/var/atlassian/application-data/bitbucket')
+      expect(chef_run).to create_directory('change home_path ownership to bitbucket_user')
         .with_user('atlbitbucket').with_mode(00755)
     end
 
     it 'creates bitbucket home directory with root user if one does not exist' do
       expect(Dir).to receive(:exist?).with('/var/atlassian/application-data/bitbucket').and_return(false)
-      expect(chef_run).to_not create_directory('/var/atlassian/application-data/bitbucket')
-                                  .with_user('root').with_mode(00755)
+      expect(chef_run).to create_directory('home_path with root user')
+        .with_user('root').with_mode(00755)
     end
-    
+
     it 'does not create bitbucket home directory if one already exists' do
       expect(Dir).to receive(:exist?).with('/var/atlassian/application-data/bitbucket').and_return(true)
-      expect(chef_run).to_not create_directory('/var/atlassian/application-data/bitbucket')
-                              .with_user('root').with_mode(00755)
+      expect(chef_run).to_not create_directory('home_path with root user')
+        .with_user('root').with_mode(00755)
     end
 
     it 'creates atlbitbucket group' do
