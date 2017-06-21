@@ -8,9 +8,9 @@ describe 'test::specific_params' do
   context 'install configure and service bitbucket with specific params' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['jvm_args'] = 'jvmargs'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['jvm_args'] = 'jvmargs'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
         server.update_node(node)
       end.converge(described_recipe)
     end
@@ -49,9 +49,9 @@ describe 'test::specific_params' do
   context 'step into and test install configure and service bitbucket with specific params' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(step_into: %w(bitbucket_install bitbucket_config bitbucket_service), platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['jvm_args'] = 'jvmargs'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['jvm_args'] = 'jvmargs'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
         server.update_node(node)
       end.converge(described_recipe)
     end
