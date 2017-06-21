@@ -13,13 +13,12 @@ describe file('/var/atlassian/application-data/bitbucket/shared/backup-config.pr
   its('content') { should include 'bitbucket.baseUrl' }
 end
 
-jars = ['bitbucket-backup-client.jar','bitbucket-restore-client.jar']
+jars = ['bitbucket-backup-client.jar', 'bitbucket-restore-client.jar']
 
-jars.each do | jar |
+jars.each do |jar|
   describe file("/opt/atlassian/bitbucket-backup-client/#{jar}") do
     it { should exist }
     it { should be_readable }
     it { should be_readable.by_user('atlbitbucket') }
   end
 end
-
