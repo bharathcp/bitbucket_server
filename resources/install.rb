@@ -28,7 +28,7 @@ action :install do
   directory new_resource.home_path do
     owner 'root'
     group 'root'
-    mode 0o0755
+    mode 00755
     action :create
     recursive true
     not_if { ::Dir.exist?(new_resource.home_path) }
@@ -53,7 +53,7 @@ action :install do
   directory new_resource.home_path do
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    mode 0o0755
+    mode 00755
     action :create
     recursive true
   end
@@ -61,7 +61,7 @@ action :install do
   directory new_resource.install_path do
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    mode 0o0755
+    mode 00755
     action :create
     recursive true
   end
@@ -81,7 +81,7 @@ action :install do
     source 'set-bitbucket-home.sh.erb'
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    mode 0o0755
+    mode 00755
     action :create
     variables(
       home_path: new_resource.home_path
@@ -94,7 +94,7 @@ action :install do
     source 'set-jre-home.sh.erb'
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    mode 0o0755
+    mode 00755
     action :create
     variables(
       jre_home: new_resource.jre_home
@@ -107,7 +107,7 @@ action :install do
     source '_start-webapp.sh.erb'
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    mode 0o0755
+    mode 00755
     action :create
     variables(
       jvm_args: new_resource.jvm_args

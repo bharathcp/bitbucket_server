@@ -32,7 +32,7 @@ action :install do
   template "#{new_resource.install_path}/#{new_resource.product}-backup-client/backup-config.properties" do
     source 'backup-config.properties.erb'
     owner new_resource.bitbucket_user
-    mode 0o0755
+    mode 00755
     variables backup_client: {
       'user' => new_resource.backup_user,
       'password' => new_resource.backup_password,
