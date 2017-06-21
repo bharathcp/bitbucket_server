@@ -1,0 +1,17 @@
+# Configuration options for Bitbucket Backup Client 
+# Comments are from Documentation https://confluence.atlassian.com/bitbucketserver/using-the-bitbucket-server-backup-client-776640064.html
+# Defines the location of the home directory of the Bitbucket Server instance you wish to back up or restore to. REQUIRED
+# If omitted here it will be taken from the BITBUCKET_HOME environment variable or the Java system property of the same name if supplied to the Backup and Restore Client on the command line. As a required value, backup and restore will fail if it is not supplied through one of these mechanisms.
+bitbucket.home=<%= @backup_client['home_path'] %>
+# Defines the username of the Bitbucket Server user with administrative privileges you wish to perform the backup. REQUIRED
+# If omitted here it will be taken from the Java system property of the same name if supplied to the Backup Client on the command line. 
+bitbucket.user=<%= @backup_client['user'] %>
+# Defines the password of the Bitbucket Server user with administrative privileges you wish to perform the backup. REQUIRED
+# If omitted here it will be taken from the Java system property of the same name if supplied to the Backup Client on the command line.
+bitbucket.password=<%= @backup_client['password'] %>
+# Defines base URL of the Bitbucket Server instance you wish to back up. REQUIRED
+# If omitted here it will be taken from the Java system property of the same name if supplied on the command line to the Backup Client. 
+bitbucket.baseUrl=<%= @backup_client['base_url'] %>
+# Defines where the Backup Client will store its own files, such as backup archives.
+# If not specified, these files are stored beneath the working directory for the Backup Client. Backup files will be stored in a backup subdirectory and logs will be stored in a logs subdirectory.
+backup.home=<%= @backup_client['backup_path'] %>

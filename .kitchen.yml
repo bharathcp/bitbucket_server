@@ -30,9 +30,11 @@ suites:
       - recipe[java]
       - recipe[git::source]
       - recipe[test::default]
+      - recipe[test::backup_client]
     verifier:
       inspec_tests:
         - test/smoke/default
+        - test/smoke/default/backup_client_test.rb 
     attributes:
       java:
         install_flavor: 'oracle'
