@@ -8,9 +8,9 @@ describe 'test::specific_version' do
   context 'Step into install resources and test invalid version=nil' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(step_into: 'bitbucket_install', platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
-        node.set['bitbucket']['version'] = nil
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['bitbucket']['version'] = nil
         server.update_node(node)
       end.converge(described_recipe)
     end
@@ -22,9 +22,9 @@ describe 'test::specific_version' do
   context 'Step into install resources and test invalid version=5' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(step_into: 'bitbucket_install', platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
-        node.set['bitbucket']['version'] = '5'
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['bitbucket']['version'] = '5'
         server.update_node(node)
       end.converge(described_recipe)
     end
@@ -36,9 +36,9 @@ describe 'test::specific_version' do
   context 'Step into install resources and test invalid version=5.0' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(step_into: 'bitbucket_install', platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
-        node.set['bitbucket']['version'] = '5.0'
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['bitbucket']['version'] = '5.0'
         server.update_node(node)
       end.converge(described_recipe)
     end
@@ -50,9 +50,9 @@ describe 'test::specific_version' do
   context 'Step into install resources and test valid version=5.0.1' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(step_into: 'bitbucket_install', platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
-        node.set['bitbucket']['version'] = '5.0.1'
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['bitbucket']['version'] = '5.0.1'
         server.update_node(node)
       end.converge(described_recipe)
     end

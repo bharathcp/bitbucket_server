@@ -8,8 +8,8 @@ describe 'test::default' do
   context 'Without stepping into custom resources and default values' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
         server.update_node(node)
       end.converge(described_recipe)
     end
@@ -36,8 +36,8 @@ describe 'test::default' do
   context 'Step into custom resources and default values' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(step_into: %w(bitbucket_install bitbucket_config bitbucket_service), platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
         server.update_node(node)
       end.converge(described_recipe)
     end
@@ -135,9 +135,9 @@ describe 'test::default' do
   context 'Step into custom resources with jvm_args defined' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(step_into: %w(bitbucket_install bitbucket_config bitbucket_service), platform: 'centos', version: '7.3.1611') do |node, server|
-        node.set['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
-        node.set['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
-        node.set['bitbucket']['jvm_args'] = '-Dhttp.proxy=blah'
+        node.default['java']['java_home'] = '/usr/lib/jvm/java-8-oracl'
+        node.default['bitbucket']['properties'] = { 'setup.displayName' => 'my bitbucket' }
+        node.default['bitbucket']['jvm_args'] = '-Dhttp.proxy=blah'
         server.update_node(node)
       end.converge(described_recipe)
     end
