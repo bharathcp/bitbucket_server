@@ -10,22 +10,17 @@ property :bitbucket_user, String, default: 'atlbitbucket'
 property :bitbucket_group, String, default: 'atlbitbucket'
 property :home_path, String, default: '/var/atlassian/application-data/bitbucket'
 property :install_path, String, default: '/opt/atlassian'
-property :checksum, String, default: lazy {
-                                       case version
-                                       when '5.0.1'
-                                         '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
-                                       when '5.0.0'
-                                         'a1505e06dc126279c710ce6c289fc41b078bab5de0beff44fc27bd17339ebdf9'
-                                       end
-                                     }
+property :checksum, String
 property :url_base, String, default: 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket'
 property :jre_home, String
 property :jvm_args, String
 
 action :install do
+  resolve_checksum
   validate_version
 
-  directory new_resource.home_path do
+  directory 'home_path with root user' do
+    path new_resource.home_path
     owner 'root'
     group 'root'
     mode 00755
@@ -50,7 +45,8 @@ action :install do
   end
 
   # changing ownership after user creation
-  directory new_resource.home_path do
+  directory 'change home_path ownership to bitbucket_user' do
+    path new_resource.home_path
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
     mode 00755
@@ -125,14 +121,19 @@ action :install do
 end
 
 action_class.class_eval do
-  # ensure version in semver format MAJOR.MINOR.PATCH
-  def validate_version
-    return if new_resource.version =~ /\d+.\d+.\d+/
-    Chef::Log.fatal("The version must be in MAJOR.MINOR.PATCH format. Passed value: #{new_resource.version}")
-    raise
-  end
+  include ::BitbucketServer::Helpers
 
   def pkg_url
     "#{new_resource.url_base}-#{new_resource.version}.tar.gz"
+  end
+
+  def resolve_checksum
+    return unless new_resource.checksum.nil?
+    case new_resource.version
+    when '5.0.1'
+      new_resource.checksum = '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
+    when '5.0.0'
+      new_resource.checksum = 'a1505e06dc126279c710ce6c289fc41b078bab5de0beff44fc27bd17339ebdf9'
+    end
   end
 end
