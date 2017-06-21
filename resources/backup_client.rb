@@ -2,7 +2,7 @@
 # Cookbook:: bitbucket_backup_client
 # Resource:: install Backup Client
 #
-resource_name :install_backup_client
+resource_name :backup_client
 
 property :product, String, default: 'bitbucket'
 property :version, String, default: '3.3.2'
@@ -12,7 +12,7 @@ property :home_path, String, default: '/var/atlassian/application-data/bitbucket
 property :install_path, String, default: '/opt/atlassian'
 property :client_url, String, default: 'https://maven.atlassian.com/content/groups/public/com/atlassian/bitbucket/server/backup/bitbucket-backup-distribution'
 property :bitbucket_url, String, default: 'http://127.0.0.1:8080'
-property :backup_path, String
+property :backup_path, String, required: true
 property :backup_user, String, default: 'atlbitbucket'
 property :backup_password, String
 

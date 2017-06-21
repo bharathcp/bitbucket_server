@@ -34,7 +34,7 @@ suites:
     verifier:
       inspec_tests:
         - test/smoke/default
-#        - test/smoke/default/backup_client_test.rb 
+        - test/smoke/default/backup_client_test.rb 
     attributes:
       java:
         install_flavor: 'oracle'

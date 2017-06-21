@@ -7,7 +7,7 @@
 describe 'test::backup_client' do
   context 'Step into backup client install resources' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(step_into: 'install_backup_client', platform: 'centos', version: '7.3.1611') do |node, server|
+      ChefSpec::ServerRunner.new(step_into: 'backup_client', platform: 'centos', version: '7.3.1611') do |node, server|
         server.update_node(node)
       end.converge(described_recipe)
     end
@@ -17,7 +17,7 @@ describe 'test::backup_client' do
     end
 
     it 'installs bitbucket backup client' do
-      expect(chef_run).to install_backup_client('bitbucket')
+      expect(chef_run).to backup_client('bitbucket')
     end
 
     it 'ark installs bitbucket-backup-client package' do
