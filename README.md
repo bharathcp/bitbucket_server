@@ -20,6 +20,7 @@ Chef 12.4+
 - ark
 - git
 - java
+- unzip (to be used if required for backup_client resource)
 
 *Note: We intend to remove java and git dependancies from this cook book in future.*
 
@@ -112,6 +113,33 @@ To unit test the usage of this resource you can use `service_bitbucket` matcher 
   expect(chef_run).to service_bitbucket('bitbucket')
 ```
 
+#### `backup_client`
+This resource installs bitbucket backup-client and creates the backup properties config file.
+
+Usage :
+```ruby
+backup_client 'bitbucket' do
+  backup_user 'bitbucket_backup'
+  backup_password 'passwd'
+  bitbucket_url 'http://bitbucket_url:7990'
+  backup_path '/tmp'
+end
+```
+Below are the attributes supported by this resource:
+
+| Property        | String | default                                                                      | required |
+|-----------------|:------:|------------------------------------------------------------------------------|----------|
+| product         | String | bitbucket                                                                    | false    |
+| version         | String | 3.3.2                                                                        | false    |
+| bitbucket_user  | String | atlbitbucket                                                                 | false    |
+| bitbucket_group | String | atlbitbucket                                                                 | false    |
+| home_path       | String | /var/atlassian/application-data/bitbucket                                    | false    |
+| install_path    | String | /opt/atlassian                                                               | false    |
+| bitbucket_url   | String | http://127.0.0.1:7990                           | false    |
+| client_url      | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket | false    |
+| backup_path     | String |                                                                              | true    |
+| backup_user     | String |                                                                              | false    |
+| backup_password     | String |                                                                              | false    |
 
 ## Testing
 chef exec bundle install

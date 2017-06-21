@@ -8,6 +8,7 @@ end
 
 group :test do
   gem 'chefspec'
+  gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'cookstyle'
   gem 'foodcritic'
   gem 'simplecov'
