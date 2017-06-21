@@ -129,7 +129,7 @@ action_class.class_eval do
 
   def resolve_checksum
     return unless new_resource.checksum.nil?
-    case version
+    case new_resource.version
     when '5.0.1'
       new_resource.checksum = '677528dffb770fab9ac24a2056ef7be0fc41e45d23fc2b1d62f04648bfa07fad'
     when '5.0.0'
