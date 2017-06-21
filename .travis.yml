@@ -1,4 +1,7 @@
-sudo: false
+sudo: required
+dist: trusty
+
+group: edge
 
 addons:
   apt:
