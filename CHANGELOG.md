@@ -1,5 +1,25 @@
 # Change Log
 
+## [v0.1.7](https://github.com/bharathcp/bitbucket_server/tree/v0.1.7) (2017-06-25)
+[Full Changelog](https://github.com/bharathcp/bitbucket_server/compare/v0.1.6...v0.1.7)
+
+**Implemented enhancements:**
+
+- Enhance Bitbucket Config Resource [\#16](https://github.com/bharathcp/bitbucket_server/issues/16)
+- Bitbucket Backup Client Resource [\#15](https://github.com/bharathcp/bitbucket_server/issues/15)
+
+**Closed issues:**
+
+- unit test changes to installation  [\#33](https://github.com/bharathcp/bitbucket_server/issues/33)
+- Unit test for directory idempotence in bitbucket\_install resource [\#31](https://github.com/bharathcp/bitbucket_server/issues/31)
+
+**Merged pull requests:**
+
+- Unittest dir idempotence [\#45](https://github.com/bharathcp/bitbucket_server/pull/45) ([bharathcp](https://github.com/bharathcp))
+- change node.set to node.default [\#44](https://github.com/bharathcp/bitbucket_server/pull/44) ([bharathcp](https://github.com/bharathcp))
+- Backup Client Resource [\#43](https://github.com/bharathcp/bitbucket_server/pull/43) ([dotIN](https://github.com/dotIN))
+- Unittest [\#41](https://github.com/bharathcp/bitbucket_server/pull/41) ([bharathcp](https://github.com/bharathcp))
+
 ## [v0.1.6](https://github.com/bharathcp/bitbucket_server/tree/v0.1.6) (2017-06-11)
 [Full Changelog](https://github.com/bharathcp/bitbucket_server/compare/v0.1.5...v0.1.6)
 
