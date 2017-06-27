@@ -3,6 +3,7 @@
 # Spec:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
+require 'spec_helper'
 
 describe 'test::default' do
   context 'Without stepping into custom resources and default values' do
@@ -141,6 +142,25 @@ describe 'test::default' do
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties'))
         .to notify('service[bitbucket]').to(:restart).delayed
+    end
+
+    it 'configures bitbucket.service systemd unit file' do
+      expect(chef_run).to create_systemd_unit('bitbucket.service')
+        .with_enabled(true)
+        .with_verify(false)
+        .with_content('Unit' => {
+                        'Description' => 'Atlassian Bitbucket Server Service',
+                        'After' => 'syslog.target network.target',
+                      },
+                      'Service' => {
+                        'Type' => 'forking',
+                        'User' => 'atlbitbucket',
+                        'ExecStart' => '/opt/atlassian/bitbucket/bin/start-bitbucket.sh',
+                        'ExecStop' => '/opt/atlassian/bitbucket/bin/stop-bitbucket.sh',
+                      },
+                      'Install' => {
+                        'WantedBy' => 'multi-user.target',
+                      })
     end
   end
 

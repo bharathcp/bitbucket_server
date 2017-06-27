@@ -3,6 +3,7 @@
 # Spec:: specific_version
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
+require 'spec_helper'
 
 describe 'test::specific_params' do
   context 'install configure and service bitbucket with specific params' do
@@ -138,6 +139,25 @@ describe 'test::specific_params' do
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/homepath/shared/bitbucket.properties'))
         .to notify('service[stash]').to(:restart).delayed
+    end
+
+    it 'configures stash.service systemd unit file' do
+      expect(chef_run).to create_systemd_unit('stash.service')
+        .with_enabled(true)
+        .with_verify(false)
+        .with_content('Unit' => {
+                        'Description' => 'Atlassian Bitbucket Server Service',
+                        'After' => 'syslog.target network.target',
+                      },
+                      'Service' => {
+                        'Type' => 'forking',
+                        'User' => 'bitbucket',
+                        'ExecStart' => '/installpath/bitbucket/bin/start-bitbucket.sh',
+                        'ExecStop' => '/installpath/bitbucket/bin/stop-bitbucket.sh',
+                      },
+                      'Install' => {
+                        'WantedBy' => 'multi-user.target',
+                      })
     end
   end
 end

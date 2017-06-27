@@ -3,6 +3,7 @@
 # Spec:: specific_version
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
+require 'spec_helper'
 
 describe 'test::backup_client' do
   context 'Step into backup client install resources' do
@@ -36,6 +37,11 @@ describe 'test::backup_client' do
         .with_owner('atlbitbucket')
         .with_variables(backup_client: { 'user' => 'bitbucket_backup', 'password' => 'bitbucket_admin', 'base_url' => 'http://localhost:7990', 'home_path' => '/var/atlassian/application-data/bitbucket', 'backup_path' => '/tmp' })
         .with_cookbook('bitbucket_server')
+    end
+
+    it 'configures symlink for backup-config.properties from home path to install path' do
+      expect(chef_run).to create_link('/var/atlassian/application-data/bitbucket/shared/backup-config.properties')
+        .with_to('/opt/atlassian/bitbucket-backup-client/backup-config.properties')
     end
   end
 end
