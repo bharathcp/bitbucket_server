@@ -8,27 +8,41 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/bharathcp/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server/pulls)
 [![GitHub contributors](https://img.shields.io/github/contributors/bharathcp/bitbucket_server.svg)](https://github.com/bharathcp/bitbucket_server/graphs/contributors)
 
-## Requirements
+The bitbucket server cookbook is a library cookbook that provides resource primitives for use in recipes. 
 
-### Platforms
+## Requirements
+- Chef 12.4+
+
+## Platform Support 
 - CentOS 7
 
-### Chef
-Chef 12.4+
-
-### Dependant cookbooks
+## Cookbook Dependencies
 - ark
 - git
 - java
 - unzip (to be used if required for backup_client resource)
 
-*Note: We intend to remove java and git dependancies from this cook book in future.*
+*Note: java and git will be removed as dependencies from this cookbook in the future.*
 
 ## Bitbucket version
-This cookbook only supports bitbucket server versions of 5.0.0 and above
+This cookbook only supports versions of bitbucket server 5.0.0 and above.
 
 ## Usage
-This is a library cookbook. You can use the resources it provides in your wrapper cookbook / recipe.
+
+
+Place a dependency on the bitbucket_server cookbook in your cookbook's metadata.rb
+
+```ruby
+depends 'bitbucket_server'
+```
+
+Then, in a recipe within your cookbook:
+
+```ruby
+bitbucket_install 'bitbucket' do
+  jre_home "#{node['java']['java_home']}/jre"
+end
+```
 
 ### Custom resources
 #### `bitbucket_install`
