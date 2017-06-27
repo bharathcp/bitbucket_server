@@ -50,7 +50,6 @@ namespace :unit do
       t.rspec_opts = [].tap do |a|
         a.push('--color')
         a.push('--format progress')
-        a.push('--require spec_helper')
       end.join(' ')
     end
   rescue LoadError
