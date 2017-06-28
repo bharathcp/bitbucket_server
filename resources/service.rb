@@ -29,7 +29,7 @@ action :create do
   end
 end
 
-action_class.class_eval do
+action_class do
   # ensure version in semver format MAJOR.MINOR.PATCH
   def bin_path
     "#{new_resource.install_path}/#{new_resource.product}/bin"
