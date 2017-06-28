@@ -11,9 +11,9 @@
 The bitbucket server cookbook is a library cookbook that provides resource primitives for use in recipes. 
 
 ## Requirements
-- Chef 12.4+
+- Chef 12.7+
 
-## Platform Support 
+## Platform Support
 - CentOS 7
 
 ## Cookbook Dependencies
