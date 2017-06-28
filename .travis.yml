@@ -30,9 +30,6 @@ env:
   - INSTANCE=multi-instance-ubuntu-1404
   - INSTANCE=multi-instance-ubuntu-1604
 
-before_install:
-  - sudo apt-get -qq update
-
 install:
   - chef exec bundle install
 before_script:
