@@ -32,6 +32,6 @@ end
 action_class do
   # ensure version in semver format MAJOR.MINOR.PATCH
   def bin_path
-    "#{new_resource.install_path}/#{new_resource.product}/bin"
+    "#{new_resource.install_path}/bitbucket/bin"
   end
 end
