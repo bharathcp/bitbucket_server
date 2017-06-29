@@ -3,8 +3,14 @@
 # Spec:: specific_version
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
+require 'spec_helper'
 
 describe 'test::specific_params' do
+  before do
+    # avoid breaking all of core chef wherever it calls File.exist? with other arguments
+    allow(File).to receive(:exist?).and_call_original
+  end
+
   context 'install configure and service bitbucket with specific params' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'centos', version: '7.3.1611') do |node, server|
@@ -138,6 +144,45 @@ describe 'test::specific_params' do
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/homepath/shared/bitbucket.properties'))
         .to notify('service[stash]').to(:restart).delayed
+    end
+
+    it 'configures bitbucket.properties.bak only if it exists already' do
+      expect(File).to receive(:exist?).with('/homepath/shared/bitbucket.properties.bak').and_return(true)
+      expect(chef_run).to create_template('/homepath/shared/bitbucket.properties.bak')
+        .with_source('bitbucket.properties.erb')
+        .with_owner('bitbucket')
+        .with_group('bitbucket')
+        .with_mode(00644)
+        .with_variables(properties: { 'setup.displayName' => 'my bitbucket' })
+        .with_cookbook('bitbucket_server')
+      expect(chef_run.template('/homepath/shared/bitbucket.properties.bak'))
+        .to_not notify('service[stash]').to(:restart).delayed
+    end
+
+    it 'configures bitbucket.properties.bak only if it exists already' do
+      expect(File).to receive(:exist?).with('/homepath/shared/bitbucket.properties.bak').and_return(false)
+      expect(chef_run).to_not create_template('/homepath/shared/bitbucket.properties.bak')
+      expect(chef_run.template('/homepath/shared/bitbucket.properties.bak'))
+        .to_not notify('service[bitbucket]').to(:restart).delayed
+    end
+
+    it 'configures stash.service systemd unit file' do
+      expect(chef_run).to create_systemd_unit('stash.service')
+        .with_enabled(true)
+        .with_verify(false)
+        .with_content('Unit' => {
+                        'Description' => 'Atlassian Bitbucket Server Service',
+                        'After' => 'syslog.target network.target',
+                      },
+                      'Service' => {
+                        'Type' => 'forking',
+                        'User' => 'bitbucket',
+                        'ExecStart' => '/installpath/bitbucket/bin/start-bitbucket.sh',
+                        'ExecStop' => '/installpath/bitbucket/bin/stop-bitbucket.sh',
+                      },
+                      'Install' => {
+                        'WantedBy' => 'multi-user.target',
+                      })
     end
   end
 end

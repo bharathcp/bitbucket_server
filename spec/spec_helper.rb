@@ -1,4 +1,3 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
-require 'simplecov'
-SimpleCov.start
+ChefSpec::Coverage.start!

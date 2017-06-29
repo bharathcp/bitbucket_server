@@ -3,8 +3,14 @@
 # Spec:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
+require 'spec_helper'
 
 describe 'test::default' do
+  before do
+    # avoid breaking all of core chef wherever it calls File.exist? with other arguments
+    allow(File).to receive(:exist?).and_call_original
+  end
+
   context 'Without stepping into custom resources and default values' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(platform: 'centos', version: '7.3.1611') do |node, server|
@@ -141,6 +147,45 @@ describe 'test::default' do
         .with_cookbook('bitbucket_server')
       expect(chef_run.template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties'))
         .to notify('service[bitbucket]').to(:restart).delayed
+    end
+
+    it 'configures bitbucket.properties.bak only if it exists already' do
+      expect(File).to receive(:exist?).with('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties.bak').and_return(true)
+      expect(chef_run).to create_template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties.bak')
+        .with_source('bitbucket.properties.erb')
+        .with_owner('atlbitbucket')
+        .with_group('atlbitbucket')
+        .with_mode(00644)
+        .with_variables(properties: { 'setup.displayName' => 'my bitbucket' })
+        .with_cookbook('bitbucket_server')
+      expect(chef_run.template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties.bak'))
+        .to_not notify('service[bitbucket]').to(:restart).delayed
+    end
+
+    it 'configures bitbucket.properties.bak only if it exists already' do
+      expect(File).to receive(:exist?).with('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties.bak').and_return(false)
+      expect(chef_run).to_not create_template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties.bak')
+      expect(chef_run.template('/var/atlassian/application-data/bitbucket/shared/bitbucket.properties.bak'))
+        .to_not notify('service[bitbucket]').to(:restart).delayed
+    end
+
+    it 'configures bitbucket.service systemd unit file' do
+      expect(chef_run).to create_systemd_unit('bitbucket.service')
+        .with_enabled(true)
+        .with_verify(false)
+        .with_content('Unit' => {
+                        'Description' => 'Atlassian Bitbucket Server Service',
+                        'After' => 'syslog.target network.target',
+                      },
+                      'Service' => {
+                        'Type' => 'forking',
+                        'User' => 'atlbitbucket',
+                        'ExecStart' => '/opt/atlassian/bitbucket/bin/start-bitbucket.sh',
+                        'ExecStop' => '/opt/atlassian/bitbucket/bin/stop-bitbucket.sh',
+                      },
+                      'Install' => {
+                        'WantedBy' => 'multi-user.target',
+                      })
     end
   end
 
