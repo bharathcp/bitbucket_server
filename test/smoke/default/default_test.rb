@@ -32,11 +32,6 @@ control 'check-perl' do
   end
 end
 
-describe package('perl') do
-  it { should be_installed }
-  its('version') { should include '5.16' }
-end
-
 describe file('/usr/local/bin/git') do
   it { should be_executable }
 end
