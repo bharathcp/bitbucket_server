@@ -22,9 +22,9 @@ control 'check-perl' do
   perl_ver = command('perl -e "print $]"')
   describe perl_out do
     its('exit_status') { should eq 0 }
-    its('stdout') { should match /USE_64_BIT_ALL/ }
-    its('stdout') { should match /useposix=true/ }
-    its('stdout') { should match /-fstack-protector/ }
+    its('stdout') { should include 'USE_64_BIT_ALL' }
+    its('stdout') { should include 'useposix=true' }
+    its('stdout') { should include '-fstack-protector' }
   end
   get_perl_ver = perl_ver.stdout.to_f
   describe get_perl_ver do
