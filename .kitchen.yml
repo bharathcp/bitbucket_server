@@ -23,6 +23,9 @@ verifier:
 platforms:
   - name: centos-7.3
   - name: ubuntu-16.04
+  - name: debian-8.8
+  - name: fedora-25
+  - name: opensuse-leap-42.2
 
 suites:
   - name: default
