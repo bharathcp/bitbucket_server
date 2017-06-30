@@ -13,7 +13,16 @@ addons:
     repo_token:
       secure: "Hg1+z3AkB99gB6OiGJLITTUuu8AxVlwygNEwM0rLGOgCdN1Fr7G1TbF1cDK4EwOCbtqPoI8ukGqZzDThvHsxHsmTmuz3WBr4d/yrLCMBU6MWiI//NPGr0Rh0sbSnCaT3DcIr4L7krH0SF7fAI3vIhG4M/0ee4FHV0jFhv/Haw9iORF3fLA1RY+ezOPcGPFlI2bqEAvYaNPtDTRigYXHcUEWLVhB/p93RvKHXunapveZGlAiv4crx+WZJMru/+ObHhJOehP0uohk0VKu/uzWUzzQ3d3XU1c/n6mFCCm4NXBSqQUXOVv7kTOrAM2D346eQZvipg4Z31TUuyZOzDQw6wreEcIw4ehDO3JH+y0o8x+gjEX7VUiSk0Em60IHUNRbOm1/fPbAeP34qgG4P8pCEY6CGJ9TaOJu30KgtcqBock/Y8U3hBwEiVqw8qrLPuaULWbE+6unbyWfBnCCp8tuc9gQBb2QbEZbPy/KOwwI9Q5SBB293oZoKR9Av1YywJtPaf+nKda9wisKgzD3VW5Ofhl0DlIw1OpmRQKMkyFllAoguNJfWPwsm855tgLUmu/qwP0YoB3xYsEk69O/H/FdXKvpqt87C+TIjUBNdIeSylicJzAbkFGF7Fh5uyh0mhT7AJ0o2P4pcjf35lROfz799k+7vLMsLo5fpleYHaUfONyo="
 
+branches:
+  only:
+    - master
+
 services: docker
+
+env:
+  matrix:
+  - INSTANCE=default-centos-7
+  - INSTANCE=default-ubuntu-1604
 
 before_install:
   - sudo apt-get -qq update
@@ -25,10 +34,13 @@ before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 #  - /opt/chefdk/bin/chef exec bundle exec berks install
 
-script:
-  - chef exec bundle exec rake style
-  - chef exec bundle exec rake unit
-  - KITCHEN_LOCAL_YAML=./.kitchen.dokken.yml chef exec kitchen test
+script: KITCHEN_LOCAL_YAML=./.kitchen.dokken.yml chef exec kitchen verify ${INSTANCE}
+
+matrix:
+  include:
+    - script:
+      - chef exec delivery local all
+      env: UNIT_AND_LINT=1
 
 after_success:
   - chef exec bundle exec codeclimate-test-reporter

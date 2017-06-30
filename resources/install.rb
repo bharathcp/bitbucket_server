@@ -62,6 +62,9 @@ action :install do
     recursive true
   end
 
+  # Needed to install platform specific packages needed for ark
+  include_recipe 'ark'
+
   ark new_resource.product do
     url pkg_url
     prefix_root new_resource.install_path
