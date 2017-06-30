@@ -19,6 +19,9 @@ property :backup_password, String
 action :install do
   validate_version
 
+  # Needed to install platform specific packages needed for ark
+  include_recipe 'ark'
+
   ark "#{new_resource.product}-backup-client" do
     url "#{new_resource.client_url}/#{new_resource.version}/bitbucket-backup-distribution-#{new_resource.version}.zip"
     prefix_root new_resource.install_path
@@ -26,7 +29,6 @@ action :install do
     version new_resource.version
     owner new_resource.bitbucket_user
     group new_resource.bitbucket_group
-    action :install
   end
 
   template "#{new_resource.install_path}/#{new_resource.product}-backup-client/backup-config.properties" do
