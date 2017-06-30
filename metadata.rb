@@ -11,5 +11,9 @@ issues_url 'https://github.com/bharathcp/bitbucket_server/issues' if respond_to?
 source_url 'https://github.com/bharathcp/bitbucket_server' if respond_to?(:source_url)
 
 supports 'centos', '>= 7.3'
+supports 'ubuntu', '>= 16.04'
+supports 'debian', '>= 8.8'
+supports 'fedora', '>= 25'
+supports 'opensuse-leap', '>= 42.2'
 
 depends 'ark', '~> 3.1.0'

@@ -11,24 +11,29 @@
 The bitbucket server cookbook is a library cookbook that provides resource primitives for use in recipes. 
 
 ## Requirements
+
 - Chef 12.7+
+- git 5.8.8+
+- java 8+
+- unzip (to be used if required for backup_client resource)
 
 ## Platform Support
+
 - CentOS 7
+- ubuntu 16.04
+- debian 8.8
+- fedora 25
+- opensuse-leap 42.2
+
+We actively test on above platforms version. But any other linux version that supports `systemd` should work.
 
 ## Cookbook Dependencies
 - ark
-- git
-- java
-- unzip (to be used if required for backup_client resource)
-
-*Note: java and git will be removed as dependencies from this cookbook in the future.*
 
 ## Bitbucket version
 This cookbook only supports versions of bitbucket server 5.0.0 and above.
 
 ## Usage
-
 
 Place a dependency on the bitbucket_server cookbook in your cookbook's metadata.rb
 
