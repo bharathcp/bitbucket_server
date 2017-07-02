@@ -1,5 +1,25 @@
 # Change Log
 
+## [v0.1.8](https://github.com/bharathcp/bitbucket_server/tree/v0.1.8) (2017-07-03)
+[Full Changelog](https://github.com/bharathcp/bitbucket_server/compare/v0.1.7...v0.1.8)
+
+**Implemented enhancements:**
+
+- Multi OS Support [\#9](https://github.com/bharathcp/bitbucket_server/issues/9)
+
+**Fixed bugs:**
+
+- Update README.md [\#52](https://github.com/bharathcp/bitbucket_server/issues/52)
+
+**Merged pull requests:**
+
+- corrected the readme [\#54](https://github.com/bharathcp/bitbucket_server/pull/54) ([bharathcp](https://github.com/bharathcp))
+- Adding test for other platforms [\#51](https://github.com/bharathcp/bitbucket_server/pull/51) ([bharathcp](https://github.com/bharathcp))
+- review comments [\#50](https://github.com/bharathcp/bitbucket_server/pull/50) ([bharathcp](https://github.com/bharathcp))
+- trying multiple platforms [\#48](https://github.com/bharathcp/bitbucket_server/pull/48) ([bharathcp](https://github.com/bharathcp))
+- tidy the cookbook [\#47](https://github.com/bharathcp/bitbucket_server/pull/47) ([bharathcp](https://github.com/bharathcp))
+- Minor updates to README for clarity. [\#46](https://github.com/bharathcp/bitbucket_server/pull/46) ([iennae](https://github.com/iennae))
+
 ## [v0.1.7](https://github.com/bharathcp/bitbucket_server/tree/v0.1.7) (2017-06-25)
 [Full Changelog](https://github.com/bharathcp/bitbucket_server/compare/v0.1.6...v0.1.7)
 
