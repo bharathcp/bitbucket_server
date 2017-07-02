@@ -59,5 +59,16 @@ end
 
 task unit: ['unit:rspec']
 
+namespace :changeloggen do
+  begin
+    require 'github_changelog_generator/task'
+    GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+      config.future_release = '0.1.8'
+    end
+  end
+end
+
+task changelog: ['changeloggen:changelog']
+
 # Default
 task default: ['style', 'unit', 'integration:kitchen:all']

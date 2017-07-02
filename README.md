@@ -20,10 +20,10 @@ The bitbucket server cookbook is a library cookbook that provides resource primi
 ## Platform Support
 
 - CentOS 7
-- ubuntu 16.04
-- debian 8.8
-- fedora 25
-- opensuse-leap 42.2
+- Ubuntu 16.04
+- Debian 8.8
+- Fedora 25
+- Opensuse-leap 42.2
 
 We actively test on above platforms version. But any other linux version that supports `systemd` should work.
 
@@ -171,18 +171,35 @@ chef exec bundle exec rake --tasks
 To execute lynt and unit tests
 ```bash
 chef exec bundle exec rake style
+chef exec bundle exec rake unit
+```
+or 
+```bash
+chef exec bundle exec delivery local lint
+chef exec bundle exec delivery local syntax
+chef exec bundle exec delivery local unit
+```
+or 
+```bash
+chef exec bundle exec delivery local all
 ```
 
 To execute Integration tests
 ```bash
+rake integration:kitchen:<suitename-platform>
+```
+for instance:
+```bash
 rake integration:kitchen:default-centos-73
 ```
-
 To directly use Kitchen
 ```bash
-chef exec kitchen verify   default-centos-73
+chef exec kitchen verify <suitename-platform>
 ```
-
+for instance:
+```bash
+rake integration:kitchen:default-centos-73
+```
 
 ## Contributing
 
