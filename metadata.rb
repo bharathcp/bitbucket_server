@@ -13,7 +13,7 @@ source_url 'https://github.com/bharathcp/bitbucket_server' if respond_to?(:sourc
 supports 'centos', '>= 7.3'
 supports 'ubuntu', '>= 16.04'
 supports 'debian', '>= 8.8'
-supports 'fedora', '>= 25'
+supports 'fedora'
 supports 'opensuse', '>= 42.2'
 
 depends 'ark', '~> 3.1.0'
